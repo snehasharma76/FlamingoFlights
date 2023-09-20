@@ -1,0 +1,91 @@
+<div class="card w-100">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item" (click)="activateTab('one-way')">
+        <a class="nav-link active" [class.active]="activeTab === 'one-way'" href = "#">One Way Trip</a>
+      </li>
+      <li class="nav-item" (click)="activateTab('round-trip')">
+        <a class="nav-link" [class.active]="activeTab === 'round-trip'" href = "#">Round Trip</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-10 ">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label style="text-align: left;">From</label>
+                <input type="email" required class="form-control" aria-describedby="From" formControlName="origin"
+                  placeholder="Delhi">
+                <div *ngIf="(submitted || f['origin'].touched) && f['origin'].errors" class="text-danger small">
+                  <span *ngIf="f['origin'].errors?.['required']">Origin is required</span>
+                  <span *ngIf="f['origin'].errors?.['minlength']">Origin should be more than 2 characters long</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label style="justify-content: left;">To</label>
+                <input type="email" required class="form-control" formControlName="destination" placeholder="Bengaluru">
+                <div *ngIf="(submitted || f['destination'].touched) && f['destination'].errors"
+                  class="text-danger small">
+                  <span *ngIf="f['destination'].errors?.['required']">Destination is required</span>
+                  <span *ngIf="f['destination'].errors?.['minlength']">Destination should be more than 2 characters
+                    long</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label style="justify-content: left;">Departure Date</label>
+                <input type="date" required class="form-control" formControlName="departureDate">
+                <div *ngIf="(submitted || f['departureDate'].touched) && f['departureDate'].errors"
+                  class="text-danger small">
+                  <span *ngIf="f['departureDate'].errors?.['required']">Departure Date is required</span>
+                  <span *ngIf="f['departureDate'].errors?.['invalidDate']">You chose the wrong date, can't book the
+                    flights for previous date</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label style="justify-content: left;">Return Date</label>
+                <ng-container *ngIf="activeTab === 'one-way'">
+                  <input type="date" disabled class="form-control">
+                </ng-container>
+                <ng-container *ngIf="activeTab === 'round-trip'">
+                  <input type="date" class="form-control" required name="roundTrip" formControlName="returnDate"
+                    [(ngModel)]="model.roundTrip">
+                  <div *ngIf="(submitted || f['returnDate'].touched) && f['returnDate'].errors"
+                    class="text-danger small">
+                    <span *ngIf="f['returnDate'].errors?.['required']">You opted for round Trip, please enter the
+                      date</span>
+                    <span *ngIf="f['returnDate'].errors?.['invalidDate']">Can't choose the previous date</span>
+                    <span *ngIf="f['returnDate'].errors?.['matchedWithDepartDate']">Can't be same as Departure and or
+                      less than it</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label style="justify-content: left;">Passengers</label>
+                <input type="number" value="0" class="form-control" formControlName="passenger">
+                <div *ngIf="(submitted || f['passenger'].touched) && f['passenger'].errors" class="text-danger small">
+                  <span *ngIf="f['passenger'].errors?.['notmatched']">Passengers should be greater than 0 and less than
+                    6</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2" style="display: flex; justify-content: center; align-items: center;">
+          <button class="btn btn-primary mt-3" type="submit" style="width: 100%; height: 75%;"
+            [disabled]="registerForm.invalid  && isDateRequired">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

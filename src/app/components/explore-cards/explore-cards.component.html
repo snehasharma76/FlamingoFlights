@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row mb-3" >
+        <div class="container-fluid" style="background-color: rgb(243, 242, 242);">
+            <p class="fs-2 font-semibold text-center py-2 rounded"> Explore Trending Destination</p>
+        </div>
+        <ng-container *ngFor="let c of cards">
+            <div class="col-md-4 mt-3">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body pb-0">
+                        <img [src]="'../../../assets/' +c.Destination + '.jpg'" alt="Jaipur Mahal" class="img-fluid card-img" >
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <p class="mt-2">{{c.Destination}}</p>
+                                <p class="my-1 grayText">{{c.Source | truncateLocation}} -> {{c.Destination | truncateLocation}}</p>
+                            </div>
+
+                            <div class="col-6">
+                                <p class="mt-2 text-end">From <strong> &#8377; 1648 </strong> </p>
+                                <p class="text-end my-1 grayText">{{c.Destination | truncateLocation}} -> JAI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
