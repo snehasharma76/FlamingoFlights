@@ -1,0 +1,28 @@
+*{
+    
+
+    box-sizing: border-box;
+}
+
+.payment-options{
+    padding: 0;
+    margin: 0;
+}
+
+$blue_clr : rgb(7, 7, 201) ;
+
+.blue{
+    background-color: $blue_clr ;
+}
+
+.credit-option{
+    border-left: 3px solid $blue_clr;
+    background-color: rgb(213, 213, 244);
+}
+
+.payment-option-container{
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
