@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Passenger List</h2>
+    </div>
+    <div class="card-body">
+        <ul class="passenger-list">
+            <li *ngFor="let passenger of passengerDetails" class="passenger-item">
+                <div class="passenger-info">
+                    <div class="field">
+                        <strong>First Name:</strong> {{ passenger.firstName }}
+                    </div>
+                    <div class="field">
+                        <strong>Last Name:</strong> {{ passenger.lastName }}
+                    </div>
+                    <div class="field">
+                        <strong>Age:</strong> {{ calculateAge(passenger.dateOfBirth) }}
+                    </div>
+                    <div class="field">
+                        <strong>Aadhar ID:</strong> {{ passenger.aadharId }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="alert alert-info text-center" *ngIf="contactDetails != null">
+                    Flight Itinerary will be sent to:
+                    <strong>{{ contactDetails!.emailId }}</strong> and
+                    <strong>{{ contactDetails!.mobileNo }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button (click)="recieveData()">rec</button>

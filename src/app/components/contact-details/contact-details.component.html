@@ -1,0 +1,113 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Contact Details</h4>
+    </div>
+    <div class="card-body">
+        <div class="card-header">
+            <h4>Passenger Information</h4>
+        </div>
+        <ng-container *ngIf="showForm">
+            <form [formGroup]="passengerForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="" class="col-form-label">First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName"
+                        [ngClass]="{error:(submitted || f['firstName'].touched) && getControl('firstName').errors}">
+                </div>
+                <div *ngIf="(submitted || f['firstName'].touched)&& f['firstName'].errors" class="text-danger small">
+                    <span *ngIf="f['firstName'].errors?.['required']">First Name is required</span>
+                    <span *ngIf="f['firstName'].errors?.['minlength']">First Name should have atleast 3
+                        characters</span>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="col-form-label">Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName"
+                        [ngClass]="{error:(submitted || f['lastName'].touched) && getControl('lastName').errors}">
+                </div>
+                <div *ngIf="(submitted || f['lastName'].touched)&& f['lastName'].errors" class="text-danger small">
+                    <span *ngIf="f['lastName'].errors?.['required']">Last Name is required</span>
+                    <span *ngIf="f['lastName'].errors?.['minlength']">Last Name should have atleast 3
+                        characters</span>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="col-form-label">Date Of Birth</label>
+                    <input type="date" class="form-control" formControlName="dateOfBirth"
+                        [ngClass]="{error:(submitted || f['dateOfBirth'].touched)&& getControl('dateOfBirth').errors}">
+                </div>
+                <div *ngIf="(submitted || f['dateOfBirth'].touched)&& f['dateOfBirth'].errors"
+                    class="text-danger small">
+                    <span *ngIf="f['dateOfBirth'].errors?.['required']">Date Of Birth is required</span>
+                    <span *ngIf="f['dateOfBirth'].errors?.['invalidDate']">Select a Valid Date Of Birth</span>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="col-form-label">Aadhar Id Number</label>
+                    <input type="number" class="form-control" formControlName="aadharId"
+                        [ngClass]="{error:(submitted || f['aadharId'].touched)&& getControl('aadharId').errors}">
+                </div>
+                <div *ngIf="(submitted || f['aadharId'].touched)&& f['aadharId'].errors" class="text-danger small">
+                    <span *ngIf="f['aadharId'].errors?.['required']">Aadhar Id is required</span>
+                    <span *ngIf="f['aadharId'].errors?.['invalidLength']">Length must be 12 digits</span>
+                </div>
+
+                <div class="mb-1">
+                    <button type="submit" class="btn btn-primary ">Submit</button>
+                </div>
+            </form>
+        </ng-container>
+        <ng-container *ngIf="!showForm">
+            <h2>Passenger List</h2>
+            <ul class="passenger-list">
+                <li *ngFor="let passenger of passengerDetails" class="passenger-item">
+                    <div class="passenger-info">
+                        <div class="field">
+                            <strong>First Name:</strong> {{ passenger.firstName }}
+                        </div>
+                        <div class="field">
+                            <strong>Last Name:</strong> {{ passenger.lastName }}
+                        </div>
+                        <div class="field">
+                            <strong>Date of Birth:</strong> {{ passenger.dateOfBirth | date }}
+                        </div>
+                        <div class="field">
+                            <strong>Aadhar ID:</strong> {{ passenger.aadharId }}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <button type="submit" class="btn btn-primary" (click)="OnAddNewPassenger()">Add New Passenger</button>
+        </ng-container>
+
+    </div>
+    <div class="card-footer">
+        <h5>Your ticket and flight Info will be sent here</h5>
+        <hr>
+
+        <form [formGroup]="infoSentForm" (ngSubmit)="onAddDetails()">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <label class="form-label">Mobile No.</label>
+                    <input class="form-control" type="number" formControlName="mobileNo"
+                        [ngClass]="{error:(infoSubmitted || ff['mobileNo'].touched) && getControls('mobileNo').errors}">
+                    <div *ngIf="(infoSubmitted || ff['mobileNo'].touched)&& ff['mobileNo'].errors"
+                        class="text-danger small">
+                        <span *ngIf="ff['mobileNo'].errors?.['required']">Mobile Number is required</span>
+                        <span *ngIf="ff['mobileNo'].errors?.['pattern']">Invalid Mobile Number</span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <label class="form-label">Email Id</label>
+                    <input class="form-control" type="email" formControlName="emailId"
+                        [ngClass]="{error:(infoSubmitted || ff['emailId'].touched) && getControls('emailId').errors}">
+                    <div *ngIf="(infoSubmitted || ff['emailId'].touched)&& ff['emailId'].errors"
+                        class="text-danger small">
+                        <span *ngIf="ff['emailId'].errors?.['required']">Email is required</span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-2 mt-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
