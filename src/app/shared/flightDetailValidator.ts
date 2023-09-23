@@ -79,11 +79,7 @@ export function dateValidatorReturn(controlName: string, departurefield: string)
       let date = Number(input[2]);
       let year = Number(input[0]);
       let month = Number(input[1]);
-
-      let currentYear = new Date().getFullYear();
-      let currentMonth = new Date().getMonth() + 1;
-      let currentDate = new Date().getDate();
-
+      
       let departure = departureDate.value;
       if (departure === null)
         return;

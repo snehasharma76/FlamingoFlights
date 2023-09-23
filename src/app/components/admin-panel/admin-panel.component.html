@@ -1,0 +1,158 @@
+<div class="container">
+    <div class="row mt-3">
+        <!-- <app-search (searchChange)= "onSearchProducts($event)"></app-search> -->
+        <div class="card">
+            <div class="card-header">
+                <div class="display-5">Welcome to admin Console Feel Free to manipulate the data:</div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 mt-4">
+                   <div style="overflow-x:auto;">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Delete Entry</th>
+                                <th>Flight ID</th>
+                                <th>Flight Name</th>
+                                <th>Price (₹)</th>
+                                <th>Available Seats</th>
+                                <th>Update Entry</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" *ngFor="let airline of airlines">
+                                <td><button class="btn btn-danger mx-auto"
+                                        (click)="deleteRow(airline.flightId)">Delete</button></td>
+                                <td>{{airline.flightId}}</td>
+                                <td><input type="text" id={{airline.flightId}} class="form-control"
+                                        [(ngModel)]=airline.flightName></td>
+                                <td><input type="number" id={{airline.flightId}} class="form-control"
+                                        [(ngModel)]=airline.startingFarePerSeat>
+                                </td>
+                                <td>
+                                    <input type="number" min=0 id={{airline.flightId}} class="form-control"
+                                        [(ngModel)]=airline.totalNumberOfSeats>
+                                </td>
+                                <td *ngIf="airline.totalNumberOfSeats<100" style="color:red"><span>Seats can't be less
+                                        than 100</span></td>
+
+                                <td>
+                                    <button class="btn btn-primary mx-auto">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="mt-4 btn btn-success mx-auto" data-bs-toggle="modal" data-bs-target="#addFlightForm">Add
+                Flights</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addFlightForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Enter Flight Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="flightAddForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Enter Origin:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" aria-describedby="Enter Origin"
+                                    formControlName="origin" placeholder="Origin">
+                                <div *ngIf="(submitted || f['origin'].touched) && f['origin'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['origin'].errors?.['required']">Origin is required</span>
+                                    <span *ngIf="f['origin'].errors?.['minlength']">Origin should be more than 2
+                                        characters long</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Enter Destination: </strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" aria-describedby="Enter Destination"
+                                    formControlName="destination" placeholder="Destination">
+                                <div *ngIf="(submitted || f['destination'].touched) && f['destination'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['destination'].errors?.['required']">Destination is required</span>
+                                    <span *ngIf="f['destination'].errors?.['minlength']">Destinationshould be more than
+                                        2 characters long</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Time Of Departure:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="datetime-local" required class="form-control"
+                                    aria-describedby="Enter time of Departure" formControlName="timeOfDeparture">
+                                <div *ngIf="(submitted || f['timeOfDeparture'].touched) && f['timeOfDeparture'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['timeOfDeparture'].errors?.['required']">Destination is
+                                        required</span>
+                                    <span *ngIf="f['timeOfDeparture'].errors?.['minlength']">Destinationshould be more
+                                        than 2 characters long</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Time Of Arrival:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="datetime-local" required class="form-control"
+                                    aria-describedby="Enter time of Arrival" formControlName="timeOfArrival">
+                                <div *ngIf="(submitted || f['timeOfArrival'].touched) && f['timeOfArrival'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['timeOfArrival'].errors?.['required']">Time of Departure is
+                                        required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Kilometres Travelled</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" required class="form-control"
+                                    aria-describedby="Enter Kilometres" formControlName="kmsTravel"
+                                    placeholder="Flamingo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" type="submit">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

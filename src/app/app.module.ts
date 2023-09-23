@@ -16,6 +16,9 @@ import { ContactDetailsComponent } from './components/contact-details/contact-de
 import { PassengerDetailsComponent } from './components/passenger-details/passenger-details.component';
 import { PaymentPortalComponent } from './components/payment-portal/payment-portal.component';
 import { FlightDetailsSummaryComponent } from './components/flight-details-summary/flight-details-summary.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { FlightDetailsSummaryComponent } from './components/flight-details-summa
     ContactDetailsComponent,
     PassengerDetailsComponent,
     PaymentPortalComponent,
-    FlightDetailsSummaryComponent
+    FlightDetailsSummaryComponent,
+    AdminPanelComponent
 
   ],
   imports: [
@@ -39,6 +43,7 @@ import { FlightDetailsSummaryComponent } from './components/flight-details-summa
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
