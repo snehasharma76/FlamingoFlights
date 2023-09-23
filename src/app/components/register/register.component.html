@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-4 justify-content-center mx-auto">
+      <div class="card">
+        <div class="card-header bg-primary text-light">
+          Register Yourself
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="form-group">
+                <label style="text-align: left;">First Name</label>
+                <input type="text" required class="form-control" formControlName="firstname">
+                <div *ngIf="(submitted || f['firstname'].touched) && f['firstname'].errors" class="text-danger small">
+                  <span *ngIf="f['firstname'].errors?.['required']"> First name is required</span>
+                  <span *ngIf="f['firstname'].errors?.['minlength']">First name should be more than 2 characters
+                    long</span>
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="form-group">
+                <label style="text-align: left;">Last Name</label>
+                <input type="text" required class="form-control" formControlName="lastname">
+                <div *ngIf="(submitted || f['lastname'].touched) && f['lastname'].errors" class="text-danger small">
+                  <span *ngIf="f['lastname'].errors?.['required']">Lastname is required</span>
+                  <span *ngIf="f['lastname'].errors?.['minlength']">Lastname should be more than 2 characters
+                    long</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label style="text-align: left;">Email Addreess</label>
+                <input type="email" required class="form-control" formControlName="username">
+                <div *ngIf="(submitted || f['username'].touched) && f['username'].errors" class="text-danger small">
+                  <span *ngIf="f['username'].errors?.['required']">Email is required</span>
+                  <span *ngIf="f['username'].errors?.['pattern']">Please Enter a valid email</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label style="text-align: left;">Date of Birth</label>
+                <input type="date" required class="form-control" aria-describedby="From" formControlName="dob">
+                <div *ngIf="(submitted || f['dob'].touched) && f['dob'].errors" class="text-danger small">
+                  <span *ngIf="f['dob'].errors?.['required']">DOB is required</span>
+                  <span *ngIf="f['dob'].errors?.['invalidDate']">Please Enter a valid date of birth</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label style="text-align: left;">Aadhar</label>
+                <input type="text" required class="form-control" formControlName="aadhar">
+                <div *ngIf="(submitted || f['aadhar'].touched) && f['aadhar'].errors" class="text-danger small">
+                  <span *ngIf="f['aadhar'].errors?.['required']">Aadhar is required</span>
+                  <span *ngIf="f['aadhar'].errors?.['minlength']">Aadhar should be 12 character</span>
+                  <span *ngIf="f['aadhar'].errors?.['maxlength']">Aadhar should be not more than 12 character</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label style="text-align: left;">Password</label>
+                <input type="password" required class="form-control" formControlName="password">
+                <div *ngIf="(submitted || f['password'].touched) && f['password'].errors" class="text-danger small">
+                  <span *ngIf="f['password'].errors?.['required']">password is required is required</span>
+                  <span *ngIf="f['password'].errors?.['pattern']">password should be strong not as weak as you</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="mt-2" style="display: flex; justify-content: center; align-items: center;">
+                <button class="btn btn-primary" type="submit" style="width: 100%; height: 95%;"
+                  [disabled]="registerForm.invalid">REGISTER</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
