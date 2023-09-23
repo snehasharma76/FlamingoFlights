@@ -1,0 +1,15 @@
+.flight-summary-first{
+    height: 3rem;
+    border-bottom: 1px dotted rgb(158, 155, 155);
+}
+
+.small-font{
+    font-size: 0.8rem ;
+}
+
+
+@media (max-width: 508px) {
+    .media-query-padding {
+      margin-left: 1rem;
+    }
+}

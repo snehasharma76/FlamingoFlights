@@ -14,6 +14,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FlightDetailComponent } from './components/flight-detail/flight-detail.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { PassengerDetailsComponent } from './components/passenger-details/passenger-details.component';
+import { PaymentPortalComponent } from './components/payment-portal/payment-portal.component';
+import { FlightDetailsSummaryComponent } from './components/flight-details-summary/flight-details-summary.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PassengerDetailsComponent } from './components/passenger-details/passen
     FooterComponent,
     FlightDetailComponent,
     ContactDetailsComponent,
-    PassengerDetailsComponent
+    PassengerDetailsComponent,
+    PaymentPortalComponent,
+    FlightDetailsSummaryComponent
 
   ],
   imports: [
