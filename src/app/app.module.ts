@@ -21,6 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FareSummaryComponent } from './components/fare-summary/fare-summary.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 
 
 @NgModule({
@@ -41,7 +48,14 @@ import { FareSummaryComponent } from './components/fare-summary/fare-summary.com
     AdminPanelComponent,
     LoginComponent,
     RegisterComponent,
-    FareSummaryComponent
+    FareSummaryComponent,
+    HomePageComponent,
+    SearchPageComponent,
+    DetailsPageComponent,
+    PaymentPageComponent,
+    AdminPageComponent,
+    LoginPageComponent,
+    RegistrationPageComponent
 
   ],
   imports: [
