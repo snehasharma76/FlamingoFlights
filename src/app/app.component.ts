@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Register } from './models/register.model';
+import { RegisterService } from './services/register.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Flamingo';
+
 }
