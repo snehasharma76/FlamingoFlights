@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn } from 'src/app/shared/flightDetailValidator';
+import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
 
 @Component({
   selector: 'app-search-flights-component',
@@ -27,13 +27,15 @@ export class DetailsComponentComponent implements OnInit {
     this.registerForm = this.fb.group({
       origin: [null, [Validators.required,Validators.minLength(3)]],
       destination: [null, [Validators.required,Validators.minLength(3)]],
-      departureDate: [null, [Validators.required, dateValidatorDepart]],
+      departureDate: [null, [Validators.required, dateValidatorDepart], originDesinationNotSame],
       returnDate: [null, [ dateValidatorReturn]],
       passenger: [0, [Validators.required]]
     },
       {
-        validators: [CheckSeatLimit("passenger"), dateValidatorDepart("departureDate"), dateValidatorReturn("returnDate", "departureDate")]
-
+        validators: [CheckSeatLimit("passenger"), dateValidatorDepart("departureDate"), dateValidatorReturn("returnDate", "departureDate"),
+        originDesinationNotSame("origin","destination")
+      ]
+         
       },
 
     );

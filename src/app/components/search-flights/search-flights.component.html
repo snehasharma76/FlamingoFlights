@@ -32,8 +32,9 @@
                 <div *ngIf="(submitted || f['destination'].touched) && f['destination'].errors"
                   class="text-danger small">
                   <span *ngIf="f['destination'].errors?.['required']">Destination is required</span>
-                  <span *ngIf="f['destination'].errors?.['minlength']">Destination should be more than 2 characters
-                    long</span>
+                  <span *ngIf="f['destination'].errors?.['minlength']">Destination should be more than 2 characters long</span>
+                  <span *ngIf="f['destination'].errors?.['sameLocation']">Destination can't be same as Origin</span>
+
                 </div>
               </div>
             </div>

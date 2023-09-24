@@ -93,6 +93,11 @@
                                     <label for="cardCvv" class="form-label mb-1">Card CVV</label>
                                     <input type="password" class="form-control" id="cardCvv" minlength="3" maxlength="3"
                                         formControlName="cardCvv" required placeholder="Enter CVV">
+                                        <div *ngIf="( f['cardCvv'].touched) && f['cardCvv'].errors"
+                                        class="text-danger mt-1 small">
+                                        <span *ngIf="f['cardCvv'].errors?.['required']">CVV is required</span>
+                                        <span *ngIf="f['cardCvv'].errors?.['minlength']">CVV Should have 3 digits</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

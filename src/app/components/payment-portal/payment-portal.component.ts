@@ -20,7 +20,7 @@ export class PaymentPortalComponent implements OnInit {
       cardNumber: [null,[Validators.required, Validators.pattern(this.mobileRegex)]],
       cardExpiryMonth: ['Month', [Validators.required]],
       cardExpiryYear: ['Year', [Validators.required]],
-      cardCvv: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
+      cardCvv: [null, [Validators.required, Validators.minLength(3)]],
       creditDebit:[null, [Validators.required]]
     }) ;
 

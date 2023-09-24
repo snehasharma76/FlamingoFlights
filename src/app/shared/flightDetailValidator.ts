@@ -79,7 +79,7 @@ export function dateValidatorReturn(controlName: string, departurefield: string)
       let date = Number(input[2]);
       let year = Number(input[0]);
       let month = Number(input[1]);
-      
+
       let departure = departureDate.value;
       if (departure === null)
         return;
@@ -114,6 +114,34 @@ export function dateValidatorReturn(controlName: string, departurefield: string)
       const stackTraceError: any = new Error('Date parsing error');
       stackTraceError.stack = error.stack;
       console.error('Date parsing error:', stackTraceError);
+    }
+  }
+}
+
+export function originDesinationNotSame(origin: string, destination: string) {
+  return (fg: FormGroup) => {
+    const originControl = fg.controls[origin];
+    const destinationControl = fg.controls[destination];
+    try {
+      if ((destinationControl.errors && !destinationControl.errors['sameLocation']) || originControl.value == null) {
+        return;
+      }
+
+      let selectedOrigin: string = originControl.value;
+      let selectedDestination: string = destinationControl.value;
+
+      if (selectedOrigin == selectedDestination) {
+        destinationControl.setErrors({ sameLocation: true });
+        return;
+      }
+      else
+        destinationControl.setErrors(null);
+      return;
+    }
+    catch (error: any) {
+      const stackTraceError: any = new Error('LocationSameError');
+      stackTraceError.stack = error.stack;
+      console.error('Orgin And Destination Can not be Same:', stackTraceError);
     }
   }
 }
