@@ -18,11 +18,6 @@ import { PaymentPortalComponent } from './components/payment-portal/payment-port
 import { FlightDetailsSummaryComponent } from './components/flight-details-summary/flight-details-summary.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { DetailsPageComponent } from './pages/details-page/details-page.component';
-import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
-import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 
 @NgModule({
@@ -40,12 +35,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     PassengerDetailsComponent,
     PaymentPortalComponent,
     FlightDetailsSummaryComponent,
-    AdminPanelComponent,
-    HomePageComponent,
-    SearchPageComponent,
-    DetailsPageComponent,
-    PaymentPageComponent,
-    AdminPageComponent
+    AdminPanelComponent
 
   ],
   imports: [
