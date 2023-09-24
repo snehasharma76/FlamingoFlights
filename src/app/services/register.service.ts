@@ -19,4 +19,5 @@ export class RegisterService {
   MakeRegistration(){
     return this.http.get<Register>(this.baseUrl +'/add') ;
   }
+  
 }
