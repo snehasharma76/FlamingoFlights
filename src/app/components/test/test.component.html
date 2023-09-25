@@ -1,0 +1,129 @@
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="">Booking Date</label>
+        <input type="date" formControlName="BookingDate">
+    </div>
+    <div>
+        <label for="">FlightId</label>
+        <input type="number" formControlName="FlightId">
+    </div>
+    <div>
+        <label for="">FlightDAte</label>
+        <input type="date" formControlName="FlightDate">
+    </div>
+    <div>
+        <label for="">NumberofPassengers</label>
+        <input type="number" formControlName="NumberOfPassengers">
+    </div>
+    <div>
+        <label for="">RatePerSeat</label>
+        <input type="number" step=".01" formControlName="RatePerSeat">
+    </div>
+    <div>
+        <label for="">PaymentMode</label>
+        <input type="text" formControlName="PaymentMode">
+    </div>
+    <div>
+        <label for="">CustomerId</label>
+        <input type=" number" formControlName="CustomerId">
+    </div>
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+<button (click)="onGetDetails()">Get Details</button>
+<h2>Booking List</h2>
+<ul class="passenger-list">
+    <li *ngFor="let booking of bookings;let i=index" class="passenger-item">
+        <!-- <li *ngFor="let item of booking[index]"> -->
+        <div class="passenger-info">
+            <div class="field">
+                {{ booking.pnrNo }}
+            </div>
+            <div class="field">
+                {{ booking.bookingDate }}
+            </div>
+            <div class="field">
+                {{ booking.flightId }}
+            </div>
+            <div class="field">
+                {{ booking.flightDate }}
+            </div>
+            <div class="field">
+                {{ booking.numberOfPassengers }}
+            </div>
+            <div class="field">
+                {{ booking.ratePerSeat }}
+            </div>
+            <div class="field">
+                {{ booking.paymentMode }}
+            </div>
+            <div class="field">
+                {{ booking.customerId }}
+            </div>
+            <div>
+                <button (click)="onDelete(booking.pnrNo!)">Delete</button>
+            </div>
+        </div>
+        <!-- </li> -->
+    </li>
+</ul>
+<h2>Add Passenger Details</h2>
+<form [formGroup]="detailsForm" (ngSubmit)="onPassengerSubmit()">
+    <div>
+        <label for="">PNR No</label>
+        <input type="number" formControlName="PnrNo">
+    </div>
+    <div>
+        <label for="">FirstName</label>
+        <input type="text" formControlName="FirstName">
+    </div>
+    <div>
+        <label for="">LastName</label>
+        <input type="text" formControlName="LastName">
+    </div>
+    <div>
+        <label for="">Age</label>
+        <input type="number" formControlName="Age">
+    </div>
+    <div>
+        <label for="">AadharNo</label>
+        <input type="text" step=".01" formControlName="AadharNo">
+    </div>
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+<button (click)="onGetPassengers()">
+    <h3>Get All Passengers</h3>
+</button>
+<ul class="passenger-list">
+    <li *ngFor="let passenger of passengersData;let i=index" class="passenger-item">
+        <!-- <li *ngFor="let item of booking[index]"> -->
+        <div class="passenger-info">
+            <div class="field">
+                {{ passenger.pnrNo }}
+            </div>
+            <div class="field">
+                {{ passenger.passengerId }}
+            </div>
+            <div class="field">
+                {{ passenger.firstName }}
+            </div>
+            <div class="field">
+                {{ passenger.lastName }}
+            </div>
+            <div class="field">
+                {{ passenger.age }}
+            </div>
+            <div class="field">
+                {{ passenger.aadharNo }}
+            </div>
+
+            <div>
+                <button (click)="onRemove(passenger.passengerId!)">Delete</button>
+            </div>
+        </div>
+        <!-- </li> -->
+    </li>
+</ul>
