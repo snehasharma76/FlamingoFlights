@@ -16,8 +16,8 @@ export class RegisterService {
     return this.http.get<Register[]>(this.baseUrl +'/getall') ;
   }
 
-  MakeRegistration(){
-    return this.http.get<Register>(this.baseUrl +'/add') ;
+  MakeRegistration(register:Register){
+    return this.http.post<Register>(this.baseUrl +'/add', register) ;
   }
   
 }

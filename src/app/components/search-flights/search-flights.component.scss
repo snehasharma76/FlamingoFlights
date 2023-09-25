@@ -1,0 +1,16 @@
+@import '../../shared/colors.scss' ;
+
+.card-header{
+    background-color: $blue_primary;
+    
+}
+
+.nav-link{
+    color: $blue_tertiary;
+}
+
+.btn{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+    border: 1px solid $blue_tertiary;
+}

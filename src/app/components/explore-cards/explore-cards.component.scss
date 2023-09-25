@@ -1,7 +1,14 @@
+@import '../../shared/colors.scss' ;
+
 .card-img{
     height: 13rem;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+
+.text-heading{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
 }

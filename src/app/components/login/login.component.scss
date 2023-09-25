@@ -1,0 +1,11 @@
+@import '../../shared/colors.scss';
+
+.card-header, button{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+}
+
+.registerBtn{
+    color: $blue_primary;
+    text-decoration: none;
+}
