@@ -13,10 +13,10 @@
                         <strong>Last Name:</strong> {{ passenger.lastName }}
                     </div>
                     <div class="field">
-                        <strong>Age:</strong> {{ calculateAge(passenger.dateOfBirth) }}
+                        <strong>Age:</strong> {{ passenger.age }}
                     </div>
                     <div class="field">
-                        <strong>Aadhar ID:</strong> {{ passenger.aadharId }}
+                        <strong>Aadhar ID:</strong> {{ passenger.aadharNo }}
                     </div>
                 </div>
             </li>
@@ -25,12 +25,12 @@
     <div class="card-footer">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="alert alert-info text-center" *ngIf="contactDetails != null">
+                <div class="alert alert-info text-center">
                     Flight Itinerary will be sent to:
-                    <strong>{{ contactDetails!.emailId }}</strong> and
-                    <strong>{{ contactDetails!.mobileNo }}</strong>
+                    <strong>{{ emailId }}</strong>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- <button (click)="recieveData()">rec</button> -->
