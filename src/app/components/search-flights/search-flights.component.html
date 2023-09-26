@@ -2,10 +2,10 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" (click)="activateTab('one-way')">
-        <a class="nav-link active" [class.active]="activeTab === 'one-way'" href = "#">One Way Trip</a>
+        <a class="nav-link active" [class.active]="activeTab === 'one-way'" href="#">One Way Trip</a>
       </li>
       <li class="nav-item" (click)="activateTab('round-trip')">
-        <a class="nav-link" [class.active]="activeTab === 'round-trip'" href = "#">Round Trip</a>
+        <a class="nav-link" [class.active]="activeTab === 'round-trip'" href="#">Round Trip</a>
       </li>
     </ul>
   </div>
@@ -17,8 +17,21 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label style="text-align: left;">From</label>
-                <input type="email" required class="form-control" aria-describedby="From" formControlName="origin"
-                  placeholder="Delhi">
+                <select type="text" required class="form-select" aria-describedby="From" formControlName="origin">
+                  <option value="Select" disabled selected>Select</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Bengaluru">Bengaluru</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Jaipur">Jaiput</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Mysore">Mysore</option>
+                  <option value="Mopa">Mopa</option>
+                  <option value="Pakyong">Pakyong</option>
+                  <option value="Udaipur">Udaipur</option>
+                  <option value="Kochi">Kochi</option>
+                </select>
                 <div *ngIf="(submitted || f['origin'].touched) && f['origin'].errors" class="text-danger small">
                   <span *ngIf="f['origin'].errors?.['required']">Origin is required</span>
                   <span *ngIf="f['origin'].errors?.['minlength']">Origin should be more than 2 characters long</span>
@@ -28,11 +41,26 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label style="justify-content: left;">To</label>
-                <input type="email" required class="form-control" formControlName="destination" placeholder="Bengaluru">
+                <select type="text" required class="form-select" aria-describedby="From" formControlName="destination">
+                  <option value="Select" disabled selected>Select</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Bengaluru">Bengaluru</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Jaipur">Jaiput</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Mysore">Mysore</option>
+                  <option value="Mopa">Mopa</option>
+                  <option value="Pakyong">Pakyong</option>
+                  <option value="Udaipur">Udaipur</option>
+                  <option value="Kochi">Kochi</option>
+                </select>
                 <div *ngIf="(submitted || f['destination'].touched) && f['destination'].errors"
                   class="text-danger small">
                   <span *ngIf="f['destination'].errors?.['required']">Destination is required</span>
-                  <span *ngIf="f['destination'].errors?.['minlength']">Destination should be more than 2 characters long</span>
+                  <span *ngIf="f['destination'].errors?.['minlength']">Destination should be more than 2 characters
+                    long</span>
                   <span *ngIf="f['destination'].errors?.['sameLocation']">Destination can't be same as Origin</span>
 
                 </div>

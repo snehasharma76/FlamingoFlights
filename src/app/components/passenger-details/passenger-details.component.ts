@@ -13,7 +13,7 @@ export class PassengerDetailsComponent {
   constructor(private detailsService: DetailsService) {
 
   }
-  recieveData() {  //change to ngOnInit when routing is added
+  ngOnInit() {  //change to ngOnInit when routing is added
     console.log(this.detailsService.passengerData);
     this.passengerDetails = this.detailsService.passengerData;
     this.contactDetails = this.detailsService.contactData;

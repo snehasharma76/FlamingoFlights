@@ -1,127 +1,134 @@
-<div class="container-fluid mt-5">
+<div class="container-fluid my-5">
     <div class="row " style=" background-color: rgb(245, 243, 243)  ;">
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-4 payment-options " style="border-right: 3px solid rgb(7, 7, 201) ">
+                    <div class="payment-option-container card-body credit-option">
+                        <i class="bi bi-credit-card-2-back"></i> &nbsp; &nbsp; <strong>Credit / Debit Card</strong>
+                    </div>
+                    <div class="payment-option-container card-body">
+                        <i class="bi bi-bank"></i> &nbsp; &nbsp; <strong>Net Banking(Coming Soon)</strong>
+                    </div>
+                    <div class="payment-option-container card-body">
+                        <i class="bi bi-wallet2"></i> &nbsp; &nbsp; <strong>Wallet(Coming Soon)</strong>
+                    </div>
+                </div>
+                <div class="col-lg-8 ">
 
-        <div class="col-lg-3 payment-options " style="border-right: 3px solid rgb(7, 7, 201) ">
+                    <p class="text-center pt-3" style="font-size: 1.2rem;">Credit / Debit Card Details</p>
+                    <hr>
+                    <form [formGroup]="cardDetailsForm" (ngSubmit)="onSubmit()">
 
-            <div class="payment-option-container card-body credit-option">
-                <i class="bi bi-credit-card-2-back"></i> &nbsp; &nbsp; <strong>Credit / Debit Card</strong>
-            </div>
-            <div class="payment-option-container card-body">
-                <i class="bi bi-bank"></i> &nbsp; &nbsp; <strong>Net Banking(Coming Soon)</strong>
-            </div>
-            <div class="payment-option-container card-body">
-                <i class="bi bi-wallet2"></i> &nbsp; &nbsp; <strong>Wallet(Coming Soon)</strong>
-            </div>
+                        <div class="row">
+                            <div class="col-12">
 
-        </div>
+                                <div class="mb-3 ">
+                                    <label for="text" class="form-label mb-1">Card Number</label>
+                                    <input type="number" class="form-control" id="CardNumber"
+                                        placeholder="Enter Card Number" required formControlName="cardNumber">
 
-
-        <div class="col-lg-6 ">
-
-            <p class="text-center pt-3" style="font-size: 1.2rem;">Credit / Debit Card Details</p>
-            <hr>
-            <form [formGroup]="cardDetailsForm" (ngSubmit)="onSubmit()">
-
-                <div class="row">
-                    <div class="col-12">
-
-                        <div class="mb-3 ">
-                            <label for="text" class="form-label mb-1">Card Number</label>
-                            <input type="number" class="form-control" id="CardNumber" placeholder="Enter Card Number"
-                                required formControlName="cardNumber">
-
-                            <div *ngIf="( f['cardNumber'].touched) && f['cardNumber'].errors"
-                                class="text-danger mt-1 small">
-                                <span *ngIf="f['cardNumber'].errors?.['required']">Card Number is required</span>
-                                <span *ngIf="f['cardNumber'].errors?.['pattern']">Card Number should be of 16
-                                    Digits</span>
-                            </div>
-
-
-                        </div>
-
-                        <div class="row ">
-                            <div class="col-8">
-
-                                <div class="row">
-
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label for="cardExpiryMonth" class="form-label mb-1"> Month</label>
-                                            <select class="form-select" id="cardExpiryMonth" name="cardExpiryMonth"
-                                                formControlName="cardExpiryMonth" required>
-                                                <option value="Month" disabled selected> Month</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label for="cardExpiryYear" class="form-label mb-1"> Year</label>
-                                            <select class="form-select" id="cardExpiryYear" name="cardExpiryYear"
-                                                formControlName="cardExpiryYear" required>
-                                                <option value="Year" disabled selected> Year</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2025">2025</option>
-                                                <option value="2026">2026</option>
-                                                <option value="2027">2027</option>
-                                                <option value="2027">2028</option>
-                                                <option value="2027">2029</option>
-                                                <option value="2027">2030</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-                            <div class="col-4">
-                                <div class="">
-                                    <label for="cardCvv" class="form-label mb-1">Card CVV</label>
-                                    <input type="password" class="form-control" id="cardCvv" minlength="3" maxlength="3"
-                                        formControlName="cardCvv" required placeholder="Enter CVV">
-                                        <div *ngIf="( f['cardCvv'].touched) && f['cardCvv'].errors"
+                                    <div *ngIf="( f['cardNumber'].touched) && f['cardNumber'].errors"
                                         class="text-danger mt-1 small">
-                                        <span *ngIf="f['cardCvv'].errors?.['required']">CVV is required</span>
-                                        <span *ngIf="f['cardCvv'].errors?.['minlength']">CVV Should have 3 digits</span>
+                                        <span *ngIf="f['cardNumber'].errors?.['required']">Card Number is
+                                            required</span>
+                                        <span *ngIf="f['cardNumber'].errors?.['pattern']">Card Number should be of 16
+                                            Digits</span>
                                     </div>
+
+
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-8">
+
+                                        <div class="row">
+
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="cardExpiryMonth" class="form-label mb-1"> Month</label>
+                                                    <select class="form-select" id="cardExpiryMonth"
+                                                        name="cardExpiryMonth" formControlName="cardExpiryMonth"
+                                                        required>
+                                                        <option value="Month" disabled selected> Month</option>
+                                                        <option value="01">01</option>
+                                                        <option value="02">02</option>
+                                                        <option value="03">03</option>
+                                                        <option value="04">04</option>
+                                                        <option value="05">05</option>
+                                                        <option value="06">06</option>
+                                                        <option value="07">07</option>
+                                                        <option value="08">08</option>
+                                                        <option value="09">09</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="cardExpiryYear" class="form-label mb-1"> Year</label>
+                                                    <select class="form-select" id="cardExpiryYear"
+                                                        name="cardExpiryYear" formControlName="cardExpiryYear" required>
+                                                        <option value="Year" disabled selected> Year</option>
+                                                        <option value="2024">2024</option>
+                                                        <option value="2025">2025</option>
+                                                        <option value="2026">2026</option>
+                                                        <option value="2027">2027</option>
+                                                        <option value="2027">2028</option>
+                                                        <option value="2027">2029</option>
+                                                        <option value="2027">2030</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="">
+                                            <label for="cardCvv" class="form-label mb-1">Card CVV</label>
+                                            <input type="password" class="form-control" id="cardCvv" minlength="3"
+                                                maxlength="3" formControlName="cardCvv" required
+                                                placeholder="Enter CVV">
+                                            <div *ngIf="( f['cardCvv'].touched) && f['cardCvv'].errors"
+                                                class="text-danger mt-1 small">
+                                                <span *ngIf="f['cardCvv'].errors?.['required']">CVV is required</span>
+                                                <span *ngIf="f['cardCvv'].errors?.['minlength']">CVV Should have 3
+                                                    digits</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-12 "> <input type="radio" value="credit" checked
+                                            formControlName="creditDebit">
+                                        Credit Card &nbsp; &nbsp;
+                                        &nbsp; <input type="radio" value="debit" formControlName="creditDebit"> Debit
+                                        Card
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-12 "> <input type="radio" value="credit" checked
-                                    formControlName="creditDebit">
-                                Credit Card &nbsp; &nbsp;
-                                &nbsp; <input type="radio" value="debit" formControlName="creditDebit"> Debit Card
+                        <div class="row pb-3">
+                            <div class="col-12 pl-5">
+                                <button class="btn blue text-light p-2 px-5" [disabled]="cardDetailsForm.invalid"> Click
+                                    To Pay</button>
                             </div>
-
                         </div>
-                    </div>
-                </div>
 
-                <div class="row pb-3">
-                    <div class="col-12 pl-5">
-                        <button class="btn blue text-light p-2 px-5" [disabled]="cardDetailsForm.invalid"> Click To Pay</button>
-                    </div>
+                    </form>
                 </div>
-
-            </form>
+            </div>
         </div>
+        <!-- Vishals component -->
+        <div class="col-lg-3 p-0">
+            <div class="col-lg-12">
+                <app-fare-summary></app-fare-summary>
+            </div>
 
+        </div>
 
     </div>
 

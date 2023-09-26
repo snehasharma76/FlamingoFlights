@@ -6,7 +6,6 @@ export class Airline {
     public timeOfDeparture: string = "";
     public timeOfArrival: string = "";
     public kmsTravel: number = 0;
-    public customerId: number = 0;
     public daysOfFlight: string = "";
     public startingFarePerSeat: number = 0;
     public totalNumberOfSeats: number = 0;

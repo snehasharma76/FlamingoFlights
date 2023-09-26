@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Airline } from 'src/app/models/airline.model';
+import { FlightSearch } from 'src/app/models/flightserach.model';
+import { AirlineService } from 'src/app/services/airline-services';
 import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
 
 @Component({
@@ -20,25 +23,36 @@ export class DetailsComponentComponent implements OnInit {
 
   isDateRequired: boolean = true;
 
+  flights: Airline[] = [];
+  searchFlights:FlightSearch = new FlightSearch();
+
  
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       origin: [null, [Validators.required,Validators.minLength(3)]],
       destination: [null, [Validators.required,Validators.minLength(3)]],
-      departureDate: [null, [Validators.required, dateValidatorDepart], originDesinationNotSame],
+      departureDate: [null, [Validators.required]],
       returnDate: [null, [ dateValidatorReturn]],
-      passenger: [0, [Validators.required]]
+      passenger: [1, [Validators.required]]
     },
       {
         validators: [CheckSeatLimit("passenger"), dateValidatorDepart("departureDate"), dateValidatorReturn("returnDate", "departureDate"),
-        originDesinationNotSame("origin","destination")
-      ]
-         
+        originDesinationNotSame("origin","destination")] 
       },
-
     );
+  }
+  searchFlightsByDataProvided(searchedFlights:FlightSearch){
+    this.airlineService.searchFlightsForUsers(searchedFlights).subscribe(value => {
+      console.log('konnichiwa');
+      this.flights = value;
+      console.log(value);
+    },
+      error => {
+        console.log("error occured while fetching data")
+      },
+      () => { console.log("Completed Reading") });
   }
 
   activateTab(tabName: string) {
@@ -56,6 +70,14 @@ export class DetailsComponentComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log(this.registerForm.value);
+    this.searchFlights.Origin = this.registerForm.controls["origin"].value;
+    this.searchFlights.Destination = this.registerForm.controls["destination"].value;
+    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value;
+    this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
+    
+
+    this.searchFlightsByDataProvided(this.searchFlights);
+
   }
 
   get f(): { [controlName: string]: AbstractControl } { //getter 
