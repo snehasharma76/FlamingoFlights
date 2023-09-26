@@ -28,6 +28,7 @@ import { PaymentPageComponent } from './pages/payment-page/payment-page.componen
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
     PaymentPageComponent,
     AdminPageComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    AboutUsComponent
 
   ],
   imports: [
