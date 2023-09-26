@@ -9,25 +9,21 @@ export class CarouselComponent {
 
   images: { imageSrc: string, imageAlt: string }[] = [
     {
-      imageSrc: 'https://images.pexels.com/photos/333525/pexels-photo-333525.jpeg?auto=compress&cs=tinysrgb&w=600',
+      imageSrc: '../../../assets/carousel-images/interior.jpg',
       imageAlt: 'img1'
     },
     {
-      imageSrc: 'https://images.pexels.com/photos/76971/fighter-jet-fighter-aircraft-f-16-falcon-aircraft-76971.jpeg?auto=compress&cs=tinysrgb&w=600',
+      imageSrc: '../../../assets/carousel-images/Kochi.jpg',
       imageAlt: 'img2'
     },
     {
-      imageSrc: 'https://images.pexels.com/photos/333525/pexels-photo-333525.jpeg?auto=compress&cs=tinysrgb&w=600',
+      imageSrc: '../../../assets/carousel-images/fuji.jpg',
       imageAlt: 'img3'
     },
     {
-      imageSrc: 'https://images.pexels.com/photos/76971/fighter-jet-fighter-aircraft-f-16-falcon-aircraft-76971.jpeg?auto=compress&cs=tinysrgb&w=600',
+      imageSrc: '../../../assets/carousel-images/udaipur.png',
       imageAlt: 'img4'
-    },
-    {
-      imageSrc: 'https://images.pexels.com/photos/333525/pexels-photo-333525.jpeg?auto=compress&cs=tinysrgb&w=600',
-      imageAlt: 'img5'
-    },
+    }
   ];
 
   indicators: boolean = true;

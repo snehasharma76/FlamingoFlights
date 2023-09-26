@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Airline } from '../models/airline.model';
 import { Flights } from '../models/flights.model';
 import { FlightSearch } from '../models/flightserach.model';
@@ -12,6 +12,8 @@ export class AirlineService {
 
     baseUrl: string = 'https://localhost:44356/flights'
 
+     private searchedFlights = new BehaviorSubject<Airline[]>([]);
+
     constructor(private http: HttpClient) { }
 
     //calling all the api's for admmin
@@ -19,23 +21,33 @@ export class AirlineService {
         return this.http.get<Airline[]>(this.baseUrl + '/admin/getflights');
     }
 
-    deleteFlight(flightId:number): Observable<boolean>{
-        return this.http.delete<boolean>(this.baseUrl + `/admin/delete/${flightId}`); 
+    deleteFlight(flightId: number): Observable<boolean> {
+        return this.http.delete<boolean>(this.baseUrl + `/admin/delete/${flightId}`);
     }
 
-    addFlight(flight:Flights):Observable<boolean>{
+    addFlight(flight: Flights): Observable<boolean> {
         return this.http.post<boolean>(this.baseUrl + `/admin/addflight`, flight);
     }
 
-    updateFlight(flightId:number, flight:Flights):Observable<boolean>{
-        
-        return this.http.put<boolean>(this.baseUrl + `/admin/updateflight/${flightId}`, flight); 
+    updateFlight(flightId: number, flight: Flights): Observable<boolean> {
+
+        return this.http.put<boolean>(this.baseUrl + `/admin/updateflight/${flightId}`, flight);
     }
 
-
-    searchFlightsForUsers(searchedFlights:FlightSearch):Observable<Airline[]>{
+    //For user Search
+    searchFlightsForUsers(searchedFlights: FlightSearch): Observable<Airline[]> {
         return this.http.post<Airline[]>(this.baseUrl + `/user/searchflights`, searchedFlights);
     }
+
+    setSharedData(data: Airline[]) {
+        console.log(data);
+        this.searchedFlights.next(data);
+    }
+    getSharedData():Observable<Airline[]> {
+        // console.log(this.searchedFlights);
+        return this.searchedFlights.asObservable();;
+    }
+
 
 }
 

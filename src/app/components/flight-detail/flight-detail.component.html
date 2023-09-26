@@ -1,11 +1,9 @@
 <!-- flight-details.component.html -->
 
-<div data-rank="1" class="c-flight-listing-row-v2">
-
+<div *ngFor = "let flight of searchedFlights">
+<div class="c-flight-listing-row-v2">
   <div class="summary-section">
-
     <div class="row">
-
       <div class="md-3 d-flex">
         <!-- For logo -->
         <div class="flight-info p-2">
@@ -16,29 +14,25 @@
             </div>
             <div class="text">
               <div class="u-text-ellipsis">
-               
-                  <div title="Flamingo" class="u-uppercase u-text-ellipsis">Flamingo </div>
-                
-                <div class="F12345" class="u-text-ellipsis">F12345</div>
+                <div title="Flamingo" class="u-uppercase u-text-ellipsis">{{flight.flightId}}</div>
+                <div class="F12345" class="u-text-ellipsis">{{flight.flightName}}</div>
               </div>
             </div>
-
           </div>
-
         </div>
         <div class="md-6">
           <!-- for flight info -->
           <div class="flight-summary">
             <div class="left-wing p-2">
-              <div class="airport-code">DEL</div>
-              <div class="time">23:15</div>
-              <div class="date">Wed, 20sep</div>
-              <div  class="text">New Delhi</div>
+              <div class="airport-code">{{flight.origin | uppercase | slice:0:3}}</div>
+              <div class="time">{{flight.timeOfDeparture | selectTime}}</div>
+              <div class="date">{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
+              <div class="text">{{flight.origin}}</div>
             </div>
             <div class="timeline-widget u-lfloat">
               <div class="c-timeline-wrapper horizontal">
                 <div class="label tl first" style="font-size: 12px;"></div>
-                <div class="label tl" style="font-size: 12px;">2hr 5min</div>
+                <div class="label tl" style="font-size: 12px;">{{calculateTimeDifference(flight.timeOfDeparture, flight.timeOfArrival)}}</div>
                 <div class="label t1 last" style="font-size: 12px;"></div>
                 <div class="c-timeline" style="height: 2px;background-color: rgb(187,187,187);"></div>
                 <div class="label br first" style="font-size: 12px"></div>
@@ -47,10 +41,10 @@
               </div>
             </div>
             <div class="right-wing p-2">
-              <div class="airport-code">BOM</div>
-              <div class="time">01:20</div>
-              <div class="date">Thu, 21 Sep</div>
-              <div  class="text">Mumbai</div>
+              <div class="airport-code">{{flight.destination | truncateLocation}}</div>
+              <div class="time">{{flight.timeOfArrival | selectTime}}</div>
+              <div class="date">{{extractDayAndMonth(flight.timeOfArrival)}}</div>
+              <div class="text">{{flight.destination}}</div>
 
             </div>
           </div>
@@ -67,14 +61,14 @@
                     <div class="before-cashback-fare">
                       <div class="fare-text">
                         <div class="c-price-diplay u-text-ellipsis" title>
-                          <span>₹4779</span>
+                          <span>{{flight.startingFarePerSeat+999}}</span>
                         </div>
                         <div class="strike-through"></div>
                       </div>
                     </div>
                     <div class="price" style="padding-right: 10px; padding-bottom:10px;">
                       <div class="c-price-display u-text-ellipsis" title>
-                        <span>₹3669</span>
+                        <span>{{flight.startingFarePerSeat}}</span>
                       </div>
                     </div>
                     <button type="button" class="btn btn-warning btn-lg">Book</button>
@@ -83,8 +77,7 @@
                 </div>
               </div>
             </div>
-
           </div>
-          
+        </div>
       </div>
-  </div>
+    </div>

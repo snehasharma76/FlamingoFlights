@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DetailsService } from '../../services/details.service';
+import { DataService } from '../../services/data.service';
+import { Passenger } from '../../models/passenger.model';
 
 @Component({
   selector: 'app-passenger-details',
@@ -7,27 +8,14 @@ import { DetailsService } from '../../services/details.service';
   styleUrls: ['./passenger-details.component.scss']
 })
 export class PassengerDetailsComponent {
-  passengerDetails: { firstName: string, lastName: string, dateOfBirth: Date, aadharId: number }[] = [];
-  contactDetails!: { mobileNo: number, emailId: string };
+  passengerDetails: Passenger[] = [];
+  emailId: string = "raukum74@gmail.com";
 
-  constructor(private detailsService: DetailsService) {
-
+  constructor(private detailsService: DataService) {
   }
-  ngOnInit() {  //change to ngOnInit when routing is added
-    console.log(this.detailsService.passengerData);
-    this.passengerDetails = this.detailsService.passengerData;
-    this.contactDetails = this.detailsService.contactData;
-  }
-  calculateAge(dateOfBirth: Date): number {
-    const today = new Date();
-    const birthDate = new Date(dateOfBirth);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
+  ngOnInit() {
+    this.passengerDetails = this.detailsService.getSharedData();
+    console.log(this.passengerDetails);
 
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-
-    return age;
   }
 }

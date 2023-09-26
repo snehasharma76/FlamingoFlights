@@ -2,10 +2,10 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" (click)="activateTab('one-way')">
-        <a class="nav-link active" [class.active]="activeTab === 'one-way'" href="#">One Way Trip</a>
+        <a class="nav-link active" [class.active]="activeTab === 'one-way'">One Way Trip</a>
       </li>
       <li class="nav-item" (click)="activateTab('round-trip')">
-        <a class="nav-link" [class.active]="activeTab === 'round-trip'" href="#">Round Trip</a>
+        <a class="nav-link" [class.active]="activeTab === 'round-trip'">Round Trip</a>
       </li>
     </ul>
   </div>
@@ -18,13 +18,13 @@
               <div class="form-group">
                 <label style="text-align: left;">From</label>
                 <select type="text" required class="form-select" aria-describedby="From" formControlName="origin">
-                  <option value="Select" disabled selected>Select</option>
+                  <option value="Select" selected>Select</option>
                   <option value="Delhi">Delhi</option>
                   <option value="Bengaluru">Bengaluru</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Kolkata">Kolkata</option>
                   <option value="Chennai">Chennai</option>
-                  <option value="Jaipur">Jaiput</option>
+                  <option value="Jaipur">Jaipur</option>
                   <option value="Chandigarh">Chandigarh</option>
                   <option value="Mysore">Mysore</option>
                   <option value="Mopa">Mopa</option>
@@ -48,7 +48,7 @@
                   <option value="Mumbai">Mumbai</option>
                   <option value="Kolkata">Kolkata</option>
                   <option value="Chennai">Chennai</option>
-                  <option value="Jaipur">Jaiput</option>
+                  <option value="Jaipur">Jaipur</option>
                   <option value="Chandigarh">Chandigarh</option>
                   <option value="Mysore">Mysore</option>
                   <option value="Mopa">Mopa</option>
@@ -112,7 +112,7 @@
         </div>
         <div class="col-md-2" style="display: flex; justify-content: center; align-items: center;">
           <button class="btn btn-primary mt-3" type="submit" style="width: 100%; height: 75%;"
-            [disabled]="registerForm.invalid  && isDateRequired">Search</button>
+            [disabled]="registerForm.invalid  && isDateRequired" >Search</button>
         </div>
       </div>
     </form>

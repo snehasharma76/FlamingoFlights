@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Airline } from 'src/app/models/airline.model';
 import { FlightSearch } from 'src/app/models/flightserach.model';
-import { AirlineService } from 'src/app/services/airline-services';
+import { AirlineService } from 'src/app/services/airline.services';
 import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
 
 @Component({
@@ -27,12 +28,12 @@ export class DetailsComponentComponent implements OnInit {
   searchFlights:FlightSearch = new FlightSearch();
 
  
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService) { }
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService, private router:Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      origin: [null, [Validators.required,Validators.minLength(3)]],
-      destination: [null, [Validators.required,Validators.minLength(3)]],
+      origin: ["Select", [Validators.required,Validators.minLength(3)]],
+      destination: ["Select", [Validators.required,Validators.minLength(3)]],
       departureDate: [null, [Validators.required]],
       returnDate: [null, [ dateValidatorReturn]],
       passenger: [1, [Validators.required]]
@@ -43,11 +44,16 @@ export class DetailsComponentComponent implements OnInit {
       },
     );
   }
+
+
   searchFlightsByDataProvided(searchedFlights:FlightSearch){
     this.airlineService.searchFlightsForUsers(searchedFlights).subscribe(value => {
       console.log('konnichiwa');
       this.flights = value;
       console.log(value);
+
+      this.airlineService.setSharedData(this.flights);
+      this.router.navigate(["/search"])
     },
       error => {
         console.log("error occured while fetching data")
@@ -69,13 +75,16 @@ export class DetailsComponentComponent implements OnInit {
   
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm.value);
+    let Cmm = new Date().getMinutes();
+    let Chh = new Date().getHours();
+    let Css:string = ":00";
+
+    // console.log(this.registerForm.value);
     this.searchFlights.Origin = this.registerForm.controls["origin"].value;
     this.searchFlights.Destination = this.registerForm.controls["destination"].value;
-    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value;
+    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value+'T'+Chh+":"+Cmm+Css;;
     this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
-    
-
+    console.log(this.searchFlights.TimeOfDeparture);
     this.searchFlightsByDataProvided(this.searchFlights);
 
   }

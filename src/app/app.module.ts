@@ -28,6 +28,10 @@ import { PaymentPageComponent } from './pages/payment-page/payment-page.componen
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { TestComponent } from './components/test/test.component';
+import { DataService } from './services/data.service';
+import { SelectTimePipe } from './pipes/select-time.pipe';
+
 
 
 @NgModule({
@@ -55,7 +59,9 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
     PaymentPageComponent,
     AdminPageComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    TestComponent,
+    SelectTimePipe
 
   ],
   imports: [
@@ -65,7 +71,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

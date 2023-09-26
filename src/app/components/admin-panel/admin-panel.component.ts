@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Airline } from 'src/app/models/airline.model';
 import { Flights } from 'src/app/models/flights.model';
-import { AirlineService } from 'src/app/services/airline-services';
+import { AirlineService } from 'src/app/services/airline.services';
 import { dateTimeValidatorArrival, dateTimeValidatorDepart, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
 @Component({
   selector: 'app-admin-panel',

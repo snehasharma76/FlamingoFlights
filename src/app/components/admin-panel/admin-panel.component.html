@@ -1,9 +1,12 @@
-<div class="container">
+<!-- <div class="container"> -->
     <div class="row mt-3">
-        <!-- <app-search (searchChange)= "onSearchProducts($event)"></app-search> -->
         <div class="card">
             <div class="card-header">
-                <div class="display-5">Welcome to admin Console Feel Free to manipulate the data:</div>
+                <div class="display-5 text-center">Admin Console</div>
+            </div>
+            <div class="text-center">
+                <button class="mt-4 btn btn-success mx-auto" data-bs-toggle="modal" data-bs-target="#addFlightForm">Add
+                    Flights</button>
             </div>
             <div class="card-body">
                 <div class="col-md-12 mt-4">
@@ -11,7 +14,7 @@
                         <table class="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Delete Entry</th>
+                                    <th>Delete</th>
                                     <th>Flight ID</th>
                                     <th>Flight Name</th>
                                     <th>Origin</th>
@@ -22,7 +25,7 @@
                                     <th>Available Seats</th>
                                     <th>Days Of Flight</th>
                                     <th>Break Flight</th>
-                                    <th>Update Entry</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,12 +78,8 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <button class="mt-4 btn btn-success mx-auto mb-4" data-bs-toggle="modal" data-bs-target="#addFlightForm">Add
-                Flights</button>
-        </div>
     </div>
-</div>
+<!-- </div> -->
 
 <!-- Modal -->
 <div class="modal fade" id="addFlightForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
