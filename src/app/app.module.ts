@@ -30,6 +30,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { TestComponent } from './components/test/test.component';
 import { DataService } from './services/data.service';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 
 
@@ -59,7 +60,8 @@ import { DataService } from './services/data.service';
     AdminPageComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    TestComponent
+    TestComponent,
+    BookingsComponent
 
   ],
   imports: [

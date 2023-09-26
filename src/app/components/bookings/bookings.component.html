@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <h1>Booked Flights</h1>
+
+    <div *ngFor="let flight of flights; let i = index" class="card mt-3">
+        <div class="card-header">
+            Flight {{ i + 1 }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Flight Details</h5>
+            <p class="card-text">
+                <strong>PNR No:</strong> {{ flight.pnrNo }}<br>
+                <strong>Booking Date:</strong> {{ flight.bookingDate | date }}<br>
+                <strong>Flight ID:</strong> {{ flight.flightId }}<br>
+                <strong>Flight Date:</strong> {{ flight.flightDate | date}}<br>
+                <strong>Number of Passengers:</strong> {{ flight.numberOfPassengers }}<br>
+                <strong>Payment Mode:</strong> {{ flight.paymentMode }}
+            </p>
+            <button class="btn btn-primary" (click)="togglePassengerDetails(i)">
+                {{ isPassengerDetailsOpen[i] ? 'Hide Details' : 'See More' }}
+            </button>
+            <div *ngIf="isPassengerDetailsOpen[i]" class="mt-3">
+                <h6>Passenger Details</h6>
+                <ng-container *ngFor="let passenger of passengers">
+                    <ng-container *ngIf="passenger.pnrNo == flight.pnrNo">
+                        <ul class="list-group passenger-list mt-2">
+                            <li class="list-group-item passenger-item">
+                                <div class="d-flex passenger-info">
+                                    <!-- <div class="flex-grow-1 field">
+                                        <strong>PNR No:</strong> {{ passenger.pnrNo }}
+                                    </div> -->
+                                    <div class="flex-grow-1 field">
+                                        <strong>Passenger ID:</strong> {{ passenger.passengerId }}
+                                    </div>
+                                    <div class="flex-grow-1 field">
+                                        <strong>First Name:</strong> {{ passenger.firstName }}
+                                    </div>
+                                    <div class="flex-grow-1 field">
+                                        <strong>Last Name:</strong> {{ passenger.lastName }}
+                                    </div>
+                                    <div class="flex-grow-1 field">
+                                        <strong>Age:</strong> {{ passenger.age }}
+                                    </div>
+                                    <div class="flex-grow-1 field">
+                                        <strong>Aadhar No:</strong> {{ passenger.aadharNo }}
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-danger"
+                                            (click)="onRemove(passenger.passengerId!)">Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
