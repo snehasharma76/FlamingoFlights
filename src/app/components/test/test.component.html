@@ -35,7 +35,6 @@
 <h2>Booking List</h2>
 <ul class="passenger-list">
     <li *ngFor="let booking of bookings;let i=index" class="passenger-item">
-        <!-- <li *ngFor="let item of booking[index]"> -->
         <div class="passenger-info">
             <div class="field">
                 {{ booking.pnrNo }}
@@ -65,7 +64,6 @@
                 <button (click)="onDelete(booking.pnrNo!)">Delete</button>
             </div>
         </div>
-        <!-- </li> -->
     </li>
 </ul>
 <h2>Add Passenger Details</h2>
