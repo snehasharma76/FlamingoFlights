@@ -1,0 +1,132 @@
+CREATE DATABASE Capstoneproject;
+USE Capstoneproject;
+
+--Register Table for CustomerDetails---
+CREATE TABLE Register(
+CustomerId INT IDENTITY(1,1) CONSTRAINT pk_Register_CustomerId PRIMARY KEY,
+FirstName VARCHAR (255),
+LastName VARCHAR(255),
+Email VARCHAR(255),
+DateOfBirth DATE,
+AadharID VARCHAR(12),
+Password VARCHAR(255)
+)
+
+ALTER TABLE Register
+ADD Role VARCHAR(10) NOT NULL DEFAULT 'User';
+
+
+
+sp_help Register;
+
+--Login Table Stores id and password of Customer--
+CREATE TABLE Login(
+CustomerId INT CONSTRAINT fk_Login_Register_CustomerId FOREIGN KEY REFERENCES Register(CustomerId) not null,
+Password VARCHAR(255)
+);
+
+
+sp_help Login;
+
+--Flight Table is used to store all Flight Related Details--
+CREATE TABLE Flights (
+    FlightID INT IDENTITY(1,1) CONSTRAINT pk_Flights_FlightID PRIMARY KEY,
+    FlightName VARCHAR(255),
+    Origin VARCHAR(255),
+    Destination VARCHAR(255),
+    TimeofDeparture TIME,
+    TimeofArrival TIME,
+    KmsTravel DECIMAL(10, 2), 
+    DaysofFlight VARCHAR(50),
+    StartingFarePerSeat DECIMAL(10, 2), -- Assuming we want to store fares with 2 decimal places
+    TotalNumberOfSeats INT,
+    SeatsBooked INT,
+    BreakFlight CHAR(1) CHECK (BreakFlight IN ('Y', 'N')) -- Check constraint for Y/N value
+);
+
+
+
+
+sp_help Flights;
+
+--FlightBooking table stores all Booking Related details--
+CREATE TABLE FlightBooking (
+    PNRNo INT IDENTITY(1,1) CONSTRAINT pk_FlightBooking_PNRNo PRIMARY KEY,
+    BookingDate DATE,
+    FlightID INT CONSTRAINT fk_FlightBooking_Flights_FlightId FOREIGN KEY REFERENCES Flights(FlightId),
+    FlightDate DATE,
+    NumberOfPassengers INT,
+    RatePerSeat DECIMAL(10, 2), -- Assuming you want to store rates with 2 decimal places
+    PaymentMode VARCHAR(50), -- Payment mode can be DebitCard/CreditCard
+	CustomerID INT CONSTRAINT fk_FlightBooking_Register_CustomerId REFERENCES Register(CustomerId),
+);
+
+drop table FlightBooking;
+
+sp_help FlightBooking;
+
+
+CREATE TABLE BookingCancellation(
+PNRNo INT CONSTRAINT fk_BookingCancellation_FlightBooking_PNRNo FOREIGN KEY REFERENCES FlightBooking(PNRNo),
+FlightId INT CONSTRAINT fk_BookingCancellation_Flights_FlightId FOREIGN KEY REFERENCES Flights(FlightId),
+RefundStatus CHAR(1) CHECK (RefundStatus IN ('Y', 'N')),
+RefundAmount INT,
+)
+
+sp_help BookingCancellation;
+
+
+CREATE TABLE CardInfo (
+    CardType VARCHAR(10), -- Allow only 'Credit' or 'Debit'
+    CardNumber VARCHAR(16), -- Assuming 16-digit card numbers
+    CVV VARCHAR(3), -- 3-digit CVV
+    CustomerID INT CONSTRAINT fk_CardInfo_Register_CustomerId REFERENCES Register(CustomerId), -- Foreign Key
+    ExpiryDate VARCHAR(5), -- Format: MM/YY
+    CONSTRAINT chk_CardType CHECK (CardType IN ('Credit', 'Debit'))
+);
+
+
+CREATE TABLE CouponCodes (
+    CouponCode VARCHAR(20) IDENTITY(1,1) CONSTRAINT pk_CouponCodes_CouponCode PRIMARY KEY,-- Unique coupon code
+    Discount DECIMAL(5, 2), -- Discount percentage or amount
+);
+
+sp_help CouponCodes;
+
+-- Inserting dummy data into the Register table 
+INSERT INTO Register VALUES ('John', 'Doe', 'johndoe@email.com', '1990-05-15', '123456789012', 'password123');
+INSERT INTO Register VALUES ( 'Alice', 'Smith', 'alice@email.com', '1985-08-20', '987654321098', 'pass456word');
+INSERT INTO Register VALUES ( 'Bob', 'Johnson', 'bob@email.com', '1995-03-10', '543210987654', 'qwerty789');
+INSERT INTO Register VALUES ( 'Emily', 'Brown', 'emily@email.com', '1992-11-28', '987654321012', 'letmein2022');
+INSERT INTO Register VALUES ( 'Michael', 'Lee', 'michael@email.com', '1988-02-04', '456789123045', 'securePwd1');
+
+Select * from Register;
+
+go
+CREATE PROCEDURE usp_CancelFlights(@pnrno int, @flightid int, @refundstatus char)
+as
+  if(exists(Select * from FlightBooking where PNRNo=@pnrno))
+	 if(exists(Select * from Flights where FlightId=@flightid))
+	    if(not exists(Select * from BookingCancellation where PNRNo=@pnrno and FlightId = @flightid ))
+	      begin
+		     Declare @passengers Int;
+			 Declare @refundamount Int;
+			 Declare @fare Int;
+			 Select @passengers = NumberOfPassengers from FlightBooking Where PNRNo = @pnrno;
+			 Select @fare = RatePerSeat from FlightBooking Where PNRNo = @pnrno;
+			 Set @refundamount = @passengers*@fare;
+		     insert BookingCancellation(PNRNo, FlightId, RefundStatus, RefundAmount) values
+			 (@pnrno, @flightid, @refundstatus, @refundamount)
+             update Flights set SeatsBooked -= @passengers where FlightId=@flightId
+             return 1;
+		  end
+         else
+		   return 0;
+     else
+	    return -1;
+  else
+      return -2;
+go
+
+
+ 
