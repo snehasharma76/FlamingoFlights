@@ -29,23 +29,22 @@
                         characters</span>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="col-form-label">Date Of Birth</label>
-                    <input type="date" class="form-control" formControlName="dateOfBirth"
-                        [ngClass]="{error:(submitted || f['dateOfBirth'].touched)&& getControl('dateOfBirth').errors}">
+                    <label for="" class="col-form-label">Age</label>
+                    <input type="number" class="form-control" formControlName="age"
+                        [ngClass]="{error:(submitted || f['age'].touched)&& getControl('age').errors}">
                 </div>
-                <div *ngIf="(submitted || f['dateOfBirth'].touched)&& f['dateOfBirth'].errors"
-                    class="text-danger small">
-                    <span *ngIf="f['dateOfBirth'].errors?.['required']">Date Of Birth is required</span>
-                    <span *ngIf="f['dateOfBirth'].errors?.['invalidDate']">Select a Valid Date Of Birth</span>
+                <div *ngIf="(submitted || f['age'].touched)&& f['age'].errors" class="text-danger small">
+                    <span *ngIf="f['age'].errors?.['required']">Age is required</span>
+                    <span *ngIf="f['age'].errors?.['invalidAge']">Select a Valid Date Of Birth</span>
                 </div>
                 <div class="mb-3">
                     <label for="" class="col-form-label">Aadhar Id Number</label>
-                    <input type="number" class="form-control" formControlName="aadharId"
-                        [ngClass]="{error:(submitted || f['aadharId'].touched)&& getControl('aadharId').errors}">
+                    <input type="number" class="form-control" formControlName="aadharNo"
+                        [ngClass]="{error:(submitted || f['aadharNo'].touched)&& getControl('aadharNo').errors}">
                 </div>
-                <div *ngIf="(submitted || f['aadharId'].touched)&& f['aadharId'].errors" class="text-danger small">
-                    <span *ngIf="f['aadharId'].errors?.['required']">Aadhar Id is required</span>
-                    <span *ngIf="f['aadharId'].errors?.['invalidLength']">Length must be 12 digits</span>
+                <div *ngIf="(submitted || f['aadharNo'].touched)&& f['aadharNo'].errors" class="text-danger small">
+                    <span *ngIf="f['aadharNo'].errors?.['required']">Aadhar Id is required</span>
+                    <span *ngIf="f['aadharNo'].errors?.['invalidLength']">Length must be 12 digits</span>
                 </div>
 
                 <div class="mb-1">
@@ -65,10 +64,10 @@
                             <strong>Last Name:</strong> {{ passenger.lastName }}
                         </div>
                         <div class="field">
-                            <strong>Date of Birth:</strong> {{ passenger.dateOfBirth | date }}
+                            <strong>Age:</strong> {{ passenger.age }}
                         </div>
                         <div class="field">
-                            <strong>Aadhar ID:</strong> {{ passenger.aadharId }}
+                            <strong>Aadhar ID:</strong> {{ passenger.aadharNo }}
                         </div>
                     </div>
                 </li>
@@ -78,7 +77,7 @@
         </ng-container>
 
     </div>
-    <div class="card-footer">
+    <!-- <div class="card-footer">
         <h5>Your ticket and flight Info will be sent here</h5>
         <hr>
 
@@ -101,6 +100,7 @@
                     <div *ngIf="(infoSubmitted || ff['emailId'].touched)&& ff['emailId'].errors"
                         class="text-danger small">
                         <span *ngIf="ff['emailId'].errors?.['required']">Email is required</span>
+                        <span *ngIf="ff['emailId'].errors?.['pattern']">Enter a valid emailId</span>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-2 mt-4">
@@ -109,5 +109,5 @@
             </div>
         </form>
 
-    </div>
+    </div> -->
 </div>
