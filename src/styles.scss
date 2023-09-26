@@ -1,12 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+@import '/src/app/shared/colors.scss';
+
+
+ *{
     margin: 0 ;
     padding: 0;
     box-sizing: border-box;
 }
 
-$gray_txt_clr : gray ;
+
 
 .grayText{
-    color: $gray_txt_clr;
+    color: gray ;
+}
+
+body{
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $blue_tertiary;
 }

@@ -6,6 +6,7 @@ import { Airline } from '../models/airline';
 @Injectable({
     providedIn: 'root'
 })
+
 export class AirlineService {
 
     constructor(private http: HttpClient) {

@@ -1,51 +1,51 @@
-<div class="row">
-    <div class="col-md-6 justify-content-center">
+<div class="conatiner-fluid" >
+
+  <div class="row">
+    <div class="col-md-6 ">
       <div class="card">
-        <div class="card-header bg-primary text-light">
-          Login Yourself
-          </div>
-          <div class="card-body">
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label style="text-align: left;">Email Addreess</label>
-                        <input type="email" required class="form-control" aria-describedby="From"
-                          formControlName="username">
-                        <div *ngIf="(submitted || f['username'].touched) && f['username'].errors"
-                          class="text-danger small">
-                          <span *ngIf="f['username'].errors?.['required']">Email is required</span>
-                          <span *ngIf="f['username'].errors?.['minlength']">Email should be more than 2 characters
-                            long</span>
-                        </div>
-                      </div>
-                    </div>
+        <div class="card-header ">
+          Login
+        </div>
+        <div class="card-body">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label style="text-align: left;">Email Addreess</label>
+                  <input type="email" required class="form-control" aria-describedby="From" formControlName="username">
+                  <div *ngIf="(submitted || f['username'].touched) && f['username'].errors" class="text-danger small">
+                    <span *ngIf="f['username'].errors?.['required']">Email is required</span>
+                    <span *ngIf="f['username'].errors?.['minlength']">Email should be more than 2 characters
+                      long</span>
                   </div>
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label style="text-align: left;">Password</label>
-                        <input type="password" required class="form-control" aria-describedby="From"
-                          formControlName="password">
-                        <div *ngIf="(submitted || f['password'].touched) && f['password'].errors"
-                          class="text-danger small">
-                          <span *ngIf="f['password'].errors?.['required']">password is required</span>
-                          <span *ngIf="f['password'].errors?.['minlength']">password should be more than 2 characters
-                            long</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              <div class="row">
-                <div class="col-md-5" style="display: flex; justify-content: center; align-items: center;">
-                  <button class="btn btn-primary mt-3" type="submit" style="width: 100%; height: 75%;"
-                    [disabled]="registerForm.invalid">SIGN IN</button>  
                 </div>
               </div>
-              <div class="row mt-2">
-                <p>Not a member?<a href="#!">Register</a></p>
-              </div>            
-            </form>
-          </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label style="text-align: left;">Password</label>
+                  <input type="password" required class="form-control" aria-describedby="From"
+                    formControlName="password">
+                  <div *ngIf="(submitted || f['password'].touched) && f['password'].errors" class="text-danger small">
+                    <span *ngIf="f['password'].errors?.['required']">password is required</span>
+                    <span *ngIf="f['password'].errors?.['minlength']">password should be more than 2 characters
+                      long</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5" style="display: flex; justify-content: center; align-items: center;">
+                <button class="p-2 mt-3" type="submit" style="width: 100%; height: 75%;"
+                  [disabled]="registerForm.invalid">Login</button>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <p>Not a member?<a routerLink="/registration" class="registerBtn">Register</a></p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+  </div>
