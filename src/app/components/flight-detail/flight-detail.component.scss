@@ -1,16 +1,15 @@
 @import '../../shared/colors.scss';
+ 
+ button{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+ }
 
-
-button {
-   background-color: $blue_primary;
-   color: $blue_tertiary;
-}
-
-.price {
+ .price{
    font-size: 24px;
 }
 
-.cont {
+.cont{
    border: 1px solid $blue_primary;
    border-radius: 5px;
 }
