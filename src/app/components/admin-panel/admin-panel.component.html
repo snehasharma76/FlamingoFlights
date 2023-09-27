@@ -1,58 +1,85 @@
-<div class="container">
+<!-- <div class="container"> -->
     <div class="row mt-3">
-        <!-- <app-search (searchChange)= "onSearchProducts($event)"></app-search> -->
         <div class="card">
             <div class="card-header">
-                <div class="display-5">Welcome to admin Console Feel Free to manipulate the data:</div>
+                <div class="display-5 text-center">Admin Console</div>
+            </div>
+            <div class="text-center">
+                <button class="mt-4 btn btn-success mx-auto" data-bs-toggle="modal" data-bs-target="#addFlightForm">Add
+                    Flights</button>
             </div>
             <div class="card-body">
                 <div class="col-md-12 mt-4">
-                   <div style="overflow-x:auto;">
-                    <table class="table">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Delete Entry</th>
-                                <th>Flight ID</th>
-                                <th>Flight Name</th>
-                                <th>Price (₹)</th>
-                                <th>Available Seats</th>
-                                <th>Update Entry</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center" *ngFor="let airline of airlines">
-                                <td><button class="btn btn-danger mx-auto"
-                                        (click)="deleteRow(airline.flightId)">Delete</button></td>
-                                <td>{{airline.flightId}}</td>
-                                <td><input type="text" id={{airline.flightId}} class="form-control"
-                                        [(ngModel)]=airline.flightName></td>
-                                <td><input type="number" id={{airline.flightId}} class="form-control"
-                                        [(ngModel)]=airline.startingFarePerSeat>
-                                </td>
-                                <td>
-                                    <input type="number" min=0 id={{airline.flightId}} class="form-control"
-                                        [(ngModel)]=airline.totalNumberOfSeats>
-                                </td>
-                                <td *ngIf="airline.totalNumberOfSeats<100" style="color:red"><span>Seats can't be less
-                                        than 100</span></td>
-
-                                <td>
-                                    <button class="btn btn-primary mx-auto">Update</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div style="overflow-x:auto;">
+                        <table class="table">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Delete</th>
+                                    <th>Flight ID</th>
+                                    <th>Flight Name</th>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Time Of Departure</th>
+                                    <th>Time of Arrival</th>
+                                    <th>Price (₹)</th>
+                                    <th>Available Seats</th>
+                                    <th>Days Of Flight</th>
+                                    <th>Break Flight</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center" *ngFor="let flight of flights">
+                                    <td><button class="btn btn-danger mx-auto"
+                                            (click)="deleteRow(flight.flightId)">Delete</button></td>
+                                    <td>{{flight.flightId}}</td>
+                                    <td>{{flight.flightName}}</td>
+                                    <td><input type="text" id={{flight.flightId}} class="form-control"
+                                            style="width: 100px;" [(ngModel)]=flight.origin>
+                                    </td>
+                                    <td><input type="text" id={{flight.flightId}} class="form-control"
+                                            style="width: 100px;" [(ngModel)]=flight.destination>
+                                    </td>
+                                    <td><input type="datetime-local" id={{flight.flightId}} class="form-control"
+                                            style="width: 120px;" [(ngModel)]=flight.timeOfDeparture>
+                                    </td>
+                                    <td><input type="datetime-local" id={{flight.flightId}} class="form-control"
+                                            style="width: 120px;" [(ngModel)]=flight.timeOfArrival>
+                                    </td>
+                                    <td>
+                                        <input type="number" min=0 id={{flight.flightId}} class="form-control"
+                                            style="width: 90px;" [(ngModel)]=flight.startingFarePerSeat>
+                                    </td>
+                                    <td>
+                                        {{flight.totalNumberOfSeats - flight.seatsBooked}}
+                                        <div *ngIf="flight.totalNumberOfSeats-flight.seatsBooked == 0"
+                                            style="color:red"><span>No seats Left</span></div>
+                                    </td>
+                                    <td>
+                                        <input type="text" min=0 id={{flight.flightId}} class="form-control"
+                                            style="width: 150px;" [(ngModel)]=flight.daysOfFlight>
+                                    </td>
+                                    <td>
+                                        <Select type="text" id={{flight.flightId}} class="form-select"
+                                            style="width: 70px;">
+                                            <option disabled selected>{{flight.breakFlight}}</option>
+                                            <option value="N">N</option>
+                                            <option value="Y">Y</option>
+                                        </Select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary mx-auto"
+                                            (click)="updateField(flight.flightId)">Update</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="text-center">
-            <button class="mt-4 btn btn-success mx-auto" data-bs-toggle="modal" data-bs-target="#addFlightForm">Add
-                Flights</button>
-        </div>
     </div>
-</div>
-
+<!-- </div> -->
 
 <!-- Modal -->
 <div class="modal fade" id="addFlightForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,6 +122,8 @@
                                     <span *ngIf="f['destination'].errors?.['required']">Destination is required</span>
                                     <span *ngIf="f['destination'].errors?.['minlength']">Destinationshould be more than
                                         2 characters long</span>
+                                    <span *ngIf="f['destination'].errors?.['sameLocation']">Destination shouldn't be
+                                        same as origin</span>
                                 </div>
                             </div>
 
@@ -110,10 +139,9 @@
                                     aria-describedby="Enter time of Departure" formControlName="timeOfDeparture">
                                 <div *ngIf="(submitted || f['timeOfDeparture'].touched) && f['timeOfDeparture'].errors"
                                     class="text-danger small">
-                                    <span *ngIf="f['timeOfDeparture'].errors?.['required']">Destination is
+                                    <span *ngIf="f['timeOfDeparture'].errors?.['required']">Date is
                                         required</span>
-                                    <span *ngIf="f['timeOfDeparture'].errors?.['minlength']">Destinationshould be more
-                                        than 2 characters long</span>
+                                    <span *ngIf="f['timeOfDeparture'].errors?.['invalidDateOrTime']">Invalid (past) Date or time</span>
                                 </div>
                             </div>
 
@@ -129,7 +157,23 @@
                                     aria-describedby="Enter time of Arrival" formControlName="timeOfArrival">
                                 <div *ngIf="(submitted || f['timeOfArrival'].touched) && f['timeOfArrival'].errors"
                                     class="text-danger small">
-                                    <span *ngIf="f['timeOfArrival'].errors?.['required']">Time of Departure is
+                                    <span *ngIf="f['timeOfArrival'].errors?.['required']">Time of Arrival is required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Total Number Of Seats:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" required class="form-control"
+                                    aria-describedby="Enter Seats Available" formControlName="totalNumberOfSeats"
+                                    placeholder="0">
+                                <div *ngIf="(submitted || f['totalNumberOfSeats'].touched) && f['totalNumberOfSeats'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['totalNumberOfSeats'].errors?.['required']">Total Number of seats are
                                         required</span>
                                 </div>
                             </div>
@@ -138,19 +182,77 @@
                     <div class="form-group mt-2">
                         <div class="row">
                             <div class="col-md-6">
-                                <label><strong>Kilometres Travelled</strong></label>
+                                <label><strong>Seats Booked:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" value=0
+                                    aria-describedby="Enter Seats Available" formControlName="seatsBooked"
+                                    placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Days of Flight:</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control"
+                                    aria-describedby="Enter Seats Available" formControlName="daysOfFlight"
+                                    placeholder="Mondays, Fridays">
+                                <div *ngIf="(submitted || f['daysOfFlight'].touched) && f['daysOfFlight'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['daysOfFlight'].errors?.['required']">Total Number of seats are
+                                        required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Starting Fare:</strong></label>
                             </div>
                             <div class="col-md-6">
                                 <input type="number" required class="form-control"
-                                    aria-describedby="Enter Kilometres" formControlName="kmsTravel"
-                                    placeholder="Flamingo">
+                                    aria-describedby="Starting fare per seat" formControlName="startingFarePerSeat"
+                                    placeholder="0">
+                                <div *ngIf="(submitted || f['startingFarePerSeat'].touched) && f['startingFarePerSeat'].errors"
+                                    class="text-danger small">
+                                    <span *ngIf="f['startingFarePerSeat'].errors?.['required']">Total Number of seats
+                                        are required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Kilometres Travelled: </strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" value=0 aria-describedby="Enter Kilometres"
+                                    formControlName="kmsTravel" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label><strong>Break Flight (Y,N):</strong></label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" value="N"
+                                    aria-describedby="Starting fare per seat" formControlName="breakFlight"
+                                    placeholder="N">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" type="submit">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" type="submit"
+                        [disabled]="flightAddForm.invalid">Save changes</button>
                 </div>
             </form>
         </div>

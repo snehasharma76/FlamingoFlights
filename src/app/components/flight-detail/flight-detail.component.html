@@ -1,48 +1,53 @@
-<div class="px-3 ">
-
+<div *ngFor="let flight of searchedFlights">
   <div class="d-flex justify-content-between mt-2 bg-light px-2 cont">
     <div class="col-md-2 mt-2 ms-1">
       <div class="mb-2">
-        <img title="Flamingo76" src="https://images.ixigo.com/img/common-resources/airline-new/6E.png" width="50px;">
+        <img title="Flamingo76" src="../../../assets/Flamingo-logos_transparent.png" width="50px;">
       </div>
       <div>
         <div>
-          <div title="Flamingo">Flamingo </div>
-          <div class="F12345">F12345</div>
+          <div title="Flamingo">{{flight.flightId}}</div>
+          <div class="F12345">{{flight.flightName}}</div>
         </div>
       </div>
     </div>
     <div class="col-md-8 d-flex justify-content-between ">
       <div class="mt-2 ">
         <div>
-          <div>DEL</div>
-          <div>23:15</div>
-          <div>Wed, 20sep</div>
-          <div>New Delhi</div>
+          <div><strong>{{flight.origin | uppercase | slice:0:3}}</strong></div>
+          <div>{{flight.timeOfDeparture | selectTime}}</div>
+          <div>{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
+          <div>{{flight.origin}}</div>
         </div>
       </div>
       <div class="col-md-8  text-center p-4">
         <div class="">
           <i class="bi bi-clock me-1"></i>
-          <div style="font-size: 12px;">2hr 5min</div>
+          <div style="font-size: 12px;">{{calculateTimeDifference(flight.timeOfDeparture,
+            flight.timeOfArrival)}}</div>
           <div style="height: 2px;background-color: rgb(187,187,187);"></div>
-          <div style="font-size: 12px;">non-stop</div>
+          <div *ngIf="flight.breakFlight == 'Y' ">
+            <div style="font-size: 12px;">non-stop</div>
+          </div>
+          <div *ngIf="flight.breakFlight == 'N' ">
+            <div style="font-size: 12px;">have Layover</div>
+          </div>
         </div>
       </div>
       <div>
-        <div>BOM</div>
-        <div>01:20</div>
-        <div>Thu, 21 Sep</div>
-        <div>Mumbai</div>
+        <div><strong>{{flight.destination | uppercase | slice:0:3}}</strong></div>
+        <div>{{flight.timeOfDeparture | selectTime}}</div>
+        <div>{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
+        <div>{{flight.destination}}</div>
       </div>
     </div>
 
     <div class="col-md-2 d-flex justify-content-center align-items-center justify-content-evenly">
       <div>
-        <span>₹3669</span>
+        <span><strong>₹{{flight.startingFarePerSeat}}</strong></span>
       </div>
       <div>
-        <button type="button" class="btn ms-auto">Book</button>
+        <button type="button" class="btn ms-auto" (click) = "bookFlightById(flight)">Book</button>
       </div>
     </div>
   </div>

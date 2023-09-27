@@ -48,52 +48,78 @@ export class RegisterComponent implements OnInit {
   }
 
   credentials!: string;
-
+  email!:string;
 
   onSubmit() {
+   
+    // after registration doing login
+    this.registerService.LogIn(this.credentials).subscribe({
+      next: (response) => {
+        sessionStorage.setItem("Role", response); // adding role in session
+        sessionStorage.setItem("Base64", this.credentials); // storing the base64 encrypted credentials
+        sessionStorage.setItem("Email", this.email);
+        this.userValidation.login(); // marking login in user validation service
+        console.log(sessionStorage.getItem("Base64"));
 
-    try {
-      this.submitted = true;
-      let firstname = this.registerForm.value.firstname;
-      let lastname = this.registerForm.value.lastname;
-      let email = this.registerForm.value.username;
-      let dob = this.registerForm.value.dob;
-      let aadhar = this.registerForm.value.aadhar;
-      let password = this.registerForm.value.password;
+        this.router.navigate(["/"]); // when after success navigating to home
 
-      this.registerService.MakeRegistration(new Register(firstname, lastname, email, dob, aadhar, password)).subscribe({
+      },
+      error: (response) => {
+        Swal.fire('Invalid Credentials!');
+
+      },
+      complete: () => { }
+    })
+  
+  // error: (err) => {
+  //       console.log(err);
+
+// },
+// complete: () => { }
+//     });
+
+try {
+  this.submitted = true;
+  let firstname = this.registerForm.value.firstname;
+  let lastname = this.registerForm.value.lastname;
+  let email = this.registerForm.value.username;
+  let dob = this.registerForm.value.dob;
+  let aadhar = this.registerForm.value.aadhar;
+  let password = this.registerForm.value.password;
+
+  this.registerService.MakeRegistration(new Register(firstname, lastname, email, dob, aadhar, password)).subscribe({
+    next: (response) => {
+      console.log(response);
+      this.credentials = btoa(`${email}:${password}`); // encrypting the credentials in base64 
+
+      // after registration doing login
+      this.registerService.LogIn(this.credentials).subscribe({
         next: (response) => {
-          console.log(response);
-          this.credentials = btoa(`${email}:${password}`); // encrypting the credentials in base64 
+          sessionStorage.setItem("Role", response); // adding role in session
+          sessionStorage.setItem("Base64", this.credentials); // storing the base64 encrypted credentials
+          this.userValidation.login(); // marking login in user validation service
 
-          // after registration doing login
-          this.registerService.LogIn(this.credentials).subscribe({
-            next: (response) => {
-              sessionStorage.setItem("Role", response); // adding role in session
-              sessionStorage.setItem("Base64", this.credentials); // storing the base64 encrypted credentials
-              this.userValidation.login(); // marking login in user validation service
+          this.router.navigate(["/"]); // when after success navigating to home
 
-              this.router.navigate(["/"]); // when after success navigating to home
-
-            },
-            error: (response) => {
-              Swal.fire('Invalid Credentials!');
-
-            },
-            complete: () => { }
-          })
         },
-        error: (err) => {
-          console.log(err);
+        error: (response) => {
+          Swal.fire('Invalid Credentials!');
 
         },
         complete: () => { }
-      });
+      })
+    },
+    error: (err) => {
+      console.log(err);
 
-    }
-    catch (error) {
-      console.error(error);
-    }
+    },
+    complete: () => { }
+  });
+
+}
+catch (error) {
+  console.error(error);
+}
 
 
   }
@@ -102,12 +128,12 @@ export class RegisterComponent implements OnInit {
 
 
   get f(): { [controlName: string]: AbstractControl } {
-    try {
-      return this.registerForm.controls;
-    } catch (error) {
-      console.error('An error occurred:', error);
-      return {}; // Returning an empty object.
-    }
+  try {
+    return this.registerForm.controls;
+  } catch (error) {
+    console.error('An error occurred:', error);
+    return {}; // Returning an empty object.
   }
+}
 
 }

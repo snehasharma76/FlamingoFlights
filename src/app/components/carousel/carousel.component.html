@@ -1,22 +1,24 @@
-<div style="padding-left: 0.8rem; padding-right: 0.8rem;">
-  
-    <div *ngIf="images && images.length>0" class="carousel-container my-0 ">
-        <img *ngFor="let image of images;let i=index" [src]="image.imageSrc" alt="" class="w-100"
-            [ngClass]="{'image-active':selectedIndex === i}">
-
-
-        <div *ngIf="indicators" class="carousel-dot-container">
-            <span *ngFor="let dot of images;let i=index" class="dot" [ngClass]="{'active':selectedIndex===i}"
-                (click)="selectImage(i)"></span>
+<div id="flamingoCarousel" class="carousel slide carousel-fade px-3" data-bs-ride="carousel" >
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../../../assets/corousel-images/fuji.jpg" class="d-block w-100 img-fluid" alt="...">
         </div>
-        <div *ngIf="controls" class="btn-carousel btn-prev">
-
-            <i class="bi bi-arrow-left-circle icon-carousel icon-prev" (click)="onPrevClick()"></i>
+        <div class="carousel-item">
+            <img src="../../../assets/corousel-images/interior.jpg" class="d-block w-100 img-fluid" alt="...">
         </div>
-        <div *ngIf="controls" class="btn-carousel btn-next">
-
-            <i class="bi bi-arrow-right-circle icon-carousel icon-next" (click)="onNextClick()"></i>
+        <div class="carousel-item">
+            <img src="../../../assets/corousel-images/Kochi.jpg" class="d-block w-100 img-fluid" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="../../../assets/corousel-images/udaipur.png" class="d-block w-100 img-fluid" alt="...">
         </div>
     </div>
-
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#flamingoCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#flamingoCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

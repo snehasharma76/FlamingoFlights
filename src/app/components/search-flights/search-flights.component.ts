@@ -1,6 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn } from 'src/app/shared/flightDetailValidator';
+import { Router } from '@angular/router';
+import { Airline } from 'src/app/models/airline.model';
+import { FlightSearch } from 'src/app/models/flightserach.model';
+import { AirlineService } from 'src/app/services/airline.services';
+import { SetFlightSearchDataService } from 'src/app/services/set-flight-search-data.service';
+import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-search-flights-component',
@@ -20,23 +26,56 @@ export class DetailsComponentComponent implements OnInit {
 
   isDateRequired: boolean = true;
 
- 
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) { }
+  flights: Airline[] = [];
+  searchFlights: FlightSearch = new FlightSearch();
+
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService, private router: Router, private setSearchedFligthData: SetFlightSearchDataService) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      origin: [null, [Validators.required,Validators.minLength(3)]],
-      destination: [null, [Validators.required,Validators.minLength(3)]],
-      departureDate: [null, [Validators.required, dateValidatorDepart]],
-      returnDate: [null, [ dateValidatorReturn]],
-      passenger: [0, [Validators.required]]
+      origin: ["Select", [Validators.required, Validators.minLength(3)]],
+      destination: ["Select", [Validators.required, Validators.minLength(3)]],
+      departureDate: [null, [Validators.required]],
+      returnDate: [null, [dateValidatorReturn]],
+      passenger: [1, [Validators.required]]
     },
       {
-        validators: [CheckSeatLimit("passenger"), dateValidatorDepart("departureDate"), dateValidatorReturn("returnDate", "departureDate")]
-
+        validators: [CheckSeatLimit("passenger"), dateValidatorDepart("departureDate"), dateValidatorReturn("returnDate", "departureDate"),
+        originDesinationNotSame("origin", "destination")]
       },
-
     );
+  }
+
+  searchFlightsByDataProvided(searchedFlights: FlightSearch) {
+    try {
+      this.airlineService.searchFlightsForUsers(searchedFlights).subscribe(value => {
+        console.log('konnichiwa');
+        this.flights = value;
+        console.log(value);
+
+        this.airlineService.setSharedData(this.flights);
+        this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
+        this.setSearchedFligthData.setFlightSearchData(this.searchFlights);
+
+        this.router.navigate(["/search"]);
+      },
+        error => {
+          console.error(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching data!',
+          });
+        },
+        () => { console.log("Completed Reading"); });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while fetching data!',
+      });
+    }
   }
 
   activateTab(tabName: string) {
@@ -50,10 +89,28 @@ export class DetailsComponentComponent implements OnInit {
 
     this.cdr.detectChanges();
   }
-  
+
   onSubmit() {
     this.submitted = true;
-    console.log(this.registerForm.value);
+    let Cmm = new Date().getMinutes();
+    let Chh = new Date().getHours();
+    let Css: string = ":00";
+
+    this.searchFlights.Origin = this.registerForm.controls["origin"].value;
+    this.searchFlights.Destination = this.registerForm.controls["destination"].value;
+    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value;
+    this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
+
+    try {
+      this.searchFlightsByDataProvided(this.searchFlights);
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while searching for flights!',
+      });
+    }
   }
 
   get f(): { [controlName: string]: AbstractControl } { //getter 

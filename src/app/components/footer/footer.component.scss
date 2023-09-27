@@ -1,10 +1,12 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import '../../shared/colors.scss' ;
 
-.bottomContainer{
+.footer-2{
     background-color: $blue_primary;
+    color: $blue_tertiary;
 }
 
-.upperContainer{
-    background-color: $blue_secondary;
+.footer-1{
+background-color  : $blue_secondary ;
+color : $blue_tertiary;
 }

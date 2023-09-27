@@ -1,6 +1,6 @@
 [
-    { "flightId": 1, "flightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"},
-    { "flightId": 2, "flightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"},
-    { "flightId": 3, "flightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"}
+    { "FlightId": 1, "FlightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"},
+    { "FlightId": 2, "FlightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"},
+    { "FlightId": 3, "FlightName": "Flamingo","origin": "Delhi","desination": "Bombay",  "TimeOfDeparture":"2023, 8, 16, 12, 0, 0", "timeofArrival":"2023, 8, 20, 12, 0, 0", "kmsTravel": 20021, "daysOfFlight":"Mondays, Fridays","startingFarePerSeat":2200, "totalNumberOfSeats":200, "seatsBooked":120, "breakFlight":"Y"}
   
 ]

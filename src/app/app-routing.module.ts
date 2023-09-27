@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { authguardGuard } from './services/authguard.guard';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'admin', component:AdminPageComponent},
   {path:'login',component:LoginPageComponent},
   {path:'registration', component:RegistrationPageComponent},
+  {path:'bookings', component:BookingsComponent},
   {path:'**',redirectTo:''}
 ];
 

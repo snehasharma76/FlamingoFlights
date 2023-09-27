@@ -12,5 +12,5 @@ export class TruncateLocationPipe implements PipeTransform {
       return location.toUpperCase();
     }
   }
-
 }
+

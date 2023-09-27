@@ -1,13 +1,13 @@
 <div class="container-fluid px-0 my-3">
     <div class="card px-0">
         <div class="card-header">
-            New Delhi To Mumbai
+            {{flight.origin}} To {{flight.destination}}
         </div>
         <div class="card-body">
             <div class="row flight-summary-first ">
 
                 <div class="img-logo col-2" style="height: 100%;">
-                    <img src="../../../assets/Goa.jpg" style="max-height: 100%;" class="" alt="jaipur Mahal">
+                    <img src="../../../assets/Flamingo-logos_transparent.png" style="max-height: 100%; max-width:100%" class="" alt="jaipur Mahal">
                 </div>
 
                 <div class="col-10 ">
@@ -15,7 +15,7 @@
                     <div class="row media-query-padding ">
 
                         <div class="col-md-6 col-12 ">
-                            <p class=" my-0">Flamingo 6E6083</p>
+                            <p class=" my-0">{{flight.flightName}} {{flight.flightId}}</p>
                         </div>
                         <div class="col-md-6 col-12 ">
                             <p class=" my-0">Economy Class</p>
@@ -30,22 +30,23 @@
                 <div class="col-md-7 col-12">
                     <div class="row">
                         <div class="col-5 pt-2">
-                            <h4 style="font-size: 1rem;">{{'DELHI' | truncateLocation}} 21 : 00</h4>
-                            <span>Wed, 20 Sep</span><br>
-                            <span>Indira Gandhi Airport</span><br>
-                            <span>New Delhi</span>
+                            <h4 style="font-size: 1rem;">{{flight.origin | truncateLocation}} {{flight.timeOfDeparture | selectTime}}</h4>
+                            <span>{{extractDayAndMonth(flight.timeOfDeparture)}}</span><br>
+                            <span>{{flight.origin}} Airport</span><br>
+                            <span>{{flight.origin}}</span>
                         </div>
 
                         <div class="col-2" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                             <h1><i class="bi bi-clock"></i></h1>
-                            <span>2hr 5min</span>
+                            <span>{{calculateTimeDifference(flight.timeOfDeparture,
+                                flight.timeOfArrival)}}</span>
                         </div>
 
                         <div class="col-5 text-end pt-2">
-                            <h4 style="font-size: 1rem;">{{'DELHI' | truncateLocation}} 21 : 00</h4>
-                            <span>Wed, 20 Sep</span><br>
-                            <span>Indira Gandhi Airport</span><br>
-                            <span>New Delhi</span>
+                            <h4 style="font-size: 1rem;">{{flight.destination | truncateLocation}} {{flight.timeOfArrival | selectTime}}</h4>
+                            <span>{{extractDayAndMonth(flight.timeOfArrival)}}</span><br>
+                            <span>{{flight.destination}} Airport</span><br>
+                            <span>{{flight.destination}}</span>
                         </div>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
             </div>
 
             <div class="row">
-                <div class="col-4"><h5 style="font-size: 1rem;">{{"Delhi" | truncateLocation}} - {{"Mumbai" | truncateLocation}}</h5></div>
+                <div class="col-4"><h5 style="font-size: 1rem;">{{flight.origin | truncateLocation}} - {{ flight.destination | truncateLocation}}</h5></div>
                 <div class="col-4"><h5 style="font-size: 1rem;">15KG</h5></div>
                 <div class="col-4"><h5 style="font-size: 1rem;">7KG</h5></div>
             </div>
