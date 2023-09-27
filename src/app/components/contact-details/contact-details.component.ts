@@ -5,7 +5,7 @@ import { AadharValidation } from '../../shared/aadhar-validator';
 import { DateValidatorContactDetails } from '../../shared/contact-details-date-validator';
 import { Passenger } from '../../models/passenger.model';
 import { DataService } from "../../services/data.service"
-import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
@@ -22,13 +22,18 @@ export class ContactDetailsComponent {
 
   showForm: boolean = true;
   constructor(private fb: FormBuilder, private detailsService: DataService) {
-    this.passengerForm = this.fb.group({
-      firstName: [null, [Validators.required, Validators.minLength(3)]],
-      lastName: [null, [Validators.required, Validators.minLength(3)]],
-      age: [null, [Validators.required]],
-      aadharNo: [null, [Validators.required]]
-    },
-      { validators: [AadharValidation("aadharNo"), DateValidatorContactDetails("age")] });
+    try {
+      this.passengerForm = this.fb.group({
+        firstName: [null, [Validators.required, Validators.minLength(3)]],
+        lastName: [null, [Validators.required, Validators.minLength(3)]],
+        age: [null, [Validators.required]],
+        aadharNo: [null, [Validators.required]]
+      },
+        { validators: [AadharValidation("aadharNo"), DateValidatorContactDetails("age")] });
+    } catch (error) {
+      console.error('Error in creating PassengerForm:', error)
+    }
+
   }
 
   ngOnInit() {
@@ -36,19 +41,24 @@ export class ContactDetailsComponent {
 
   onSubmit() {
     // console.log(this.passengerForm)
-    if (this.passengerForm.invalid) {
-      return;
+    try {
+      if (this.passengerForm.invalid) {
+        return;
+      }
+      this.dataFilled++;
+      this.submitted = true;
+      this.showForm = false;
+      this.passengerDetails.push(this.passengerForm.value);
+      this.passengerForm.reset();
+      console.log(this.passengerDetails)
+      if (this.dataFilled == this.numberOfPassengers) {
+        this.detailsService.setSharedData(this.passengerDetails);
+        this.detailsService.setInfo(true);
+      }
+    } catch (error) {
+      console.error('Error in onSubmit:', error);
     }
-    this.dataFilled++;
-    this.submitted = true;
-    this.showForm = false;
-    this.passengerDetails.push(this.passengerForm.value);
-    this.passengerForm.reset();
-    console.log(this.passengerDetails)
-    if (this.dataFilled == this.numberOfPassengers) {
-      this.detailsService.setSharedData(this.passengerDetails);
-      this.detailsService.setInfo(true);
-    }
+
   }
   OnAddNewPassenger() {
     if (this.dataFilled < this.numberOfPassengers) {
@@ -57,7 +67,11 @@ export class ContactDetailsComponent {
 
     }
     else if (this.dataFilled >= this.numberOfPassengers) {
-      alert("Data Filled For all Passengers")
+      Swal.fire({
+        icon: 'info',
+        title: 'Data Filled',
+        text: 'Data Filled For all Passengers',
+      });
     }
   }
   getControl(key: string): AbstractControl {

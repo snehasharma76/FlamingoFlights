@@ -15,13 +15,18 @@ export class BillingcardComponent implements OnInit {
   constructor(private fb: FormBuilder, private detailsService: DataService) { }
 
   ngOnInit(): void {
-    this.billingForm = this.fb.group({
-      pincode: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
-      billingaddress: [null, [Validators.required, Validators.minLength(15)]],
-      city: [null, [Validators.required, Validators.minLength(3)]],
-      state: [null, [Validators.required, Validators.minLength(3)]],
-    },
-    );
+    try {
+      this.billingForm = this.fb.group({
+        pincode: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+        billingaddress: [null, [Validators.required, Validators.minLength(15)]],
+        city: [null, [Validators.required, Validators.minLength(3)]],
+        state: [null, [Validators.required, Validators.minLength(3)]],
+      },
+      );
+    } catch (error) {
+      console.error('Error in intialising billingForm', error)
+    }
+
   }
   onSubmit() {
     this.submitted = true;

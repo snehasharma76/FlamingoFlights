@@ -54,15 +54,15 @@ export class TestComponent {
     }
   }
   onGetDetails() {
-    this.bookingService.GetBookedFlights().subscribe({
-      next: (result) => {
-        console.log(result);
-        this.bookings = result
+    // this.bookingService.GetBookedFlights().subscribe({
+    //   next: (result) => {
+    //     console.log(result);
+    //     this.bookings = result
 
-        console.log(this.bookings);
-      },
-      error: (err) => console.log(err)
-    })
+    //     console.log(this.bookings);
+    //   },
+    //   error: (err) => console.log(err)
+    // })
   }
   onDelete(pnrNo: number) {
     this.bookingService.RemoveBookedFlight(pnrNo).subscribe({

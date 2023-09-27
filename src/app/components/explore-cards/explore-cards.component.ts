@@ -10,11 +10,17 @@ export class ExploreCardsComponent implements OnInit {
   cards: { image: { Src: string, Alt: string }, Source: string, Destination: string, Cost: number }[] = [];
 
   constructor() {
-
+    try {
+      this.initializeCards();
+    } catch (error) {
+      console.error('An error occured while initializing the cards:', error)
+    }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
+
+  initializeCards() {
     this.cards.push({
       image: { Src: '../../../assets/dexter-fernandes-y97sM41-g9k-unsplash.jpg', Alt: 'Jaipur Mahal' }, Destination: 'Jaipur', Cost: 2800,
       Source: 'Delhi'
@@ -40,7 +46,7 @@ export class ExploreCardsComponent implements OnInit {
       image: { Src: '../../../assets/dexter-fernandes-y97sM41-g9k-unsplash.jpg', Alt: 'Jaipur Mahal' }, Destination: 'Rishikesh', Cost: 2800,
       Source: 'Mumbai'
     })
-
   }
+
 
 }

@@ -37,15 +37,25 @@ export class CarouselComponent {
   slideInterval: number = 3000;
 
   ngOnInit(): void {
-    if (this.autoSlide) {
-      this.autoSlideImages();
+    try {
+      if (this.autoSlide) {
+        this.autoSlideImages();
+      }
+    } catch (error) {
+      console.error('Error in autoSlideImages:', error);
     }
+
   }
 
   autoSlideImages(): void {
-    setInterval(() => {
-      this.onNextClick();
-    }, this.slideInterval);
+    try {
+      setInterval(() => {
+        this.onNextClick();
+      }, this.slideInterval);
+    } catch (error) {
+      console.error('Error in autoSlideImages setInterval:', error)
+    }
+
   }
 
   // sets index of the image on dot click
