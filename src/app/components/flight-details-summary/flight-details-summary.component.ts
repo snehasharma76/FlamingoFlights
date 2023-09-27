@@ -1,39 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { Airline } from 'src/app/models/airline.model';
 import { BookFlightService } from 'src/app/services/book-flight.service';
-import { FlightDetailComponent } from '../flight-detail/flight-detail.component';
 
 @Component({
   selector: 'app-flight-details-summary',
   templateUrl: './flight-details-summary.component.html',
   styleUrls: ['./flight-details-summary.component.scss']
 })
-export class FlightDetailsSummaryComponent implements OnInit{
+export class FlightDetailsSummaryComponent implements OnInit {
 
-  
-  flight:Airline = new Airline();
-  constructor(private getThisFlight:BookFlightService) { }
+  flight: Airline = new Airline();
+
+  constructor(private getThisFlight: BookFlightService) { }
+
   ngOnInit(): void {
-    this.flight = this.getThisFlight.getFlightData();
-    // console.log(this.flight);
+    try {
+      this.flight = this.getThisFlight.getFlightData();
+    } catch (error) {
+      console.error('Error fetching flight data:', error);
+    }
   }
-
-
 
   calculateTimeDifference(startTime: any, endTime: any) {
-    startTime = startTime.replace('T', ' ');
-    endTime = endTime.replace('T', ' ');
+    try {
+      startTime = startTime.replace('T', ' ');
+      endTime = endTime.replace('T', ' ');
 
-    const date1 = new Date(startTime);
-    const date2 = new Date(endTime);
-    // Calculate the time difference in milliseconds
-    const timeDifference = date2.getTime() - date1.getTime();
-    // Calculate hours and minutes
-    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}hr : ${minutes}min`;
+      const date1 = new Date(startTime);
+      const date2 = new Date(endTime);
+
+      // if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+      //   throw new Error("Invalid date format");
+      // }
+
+      // Calculate the time difference in milliseconds
+      const timeDifference = date2.getTime() - date1.getTime();
+      // Calculate hours and minutes
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      return `${hours}hr : ${minutes}min`;
+    } catch (error) {
+      console.error('Error calculating time difference:', error);
+      return "";
+    }
   }
-
 
   extractDayAndMonth(dateString: string): string {
     try {
@@ -52,12 +62,10 @@ export class FlightDetailsSummaryComponent implements OnInit{
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
       ];
       const month = monthNames[dateObj.getMonth()];
-      return `${weekday}, ${day} ${month}`
+      return `${weekday}, ${day} ${month}`;
     } catch (error) {
-      // Handle invalid date format
+      console.error('Error extracting day and month:', error);
       return "";
     }
   }
-
-  
 }
