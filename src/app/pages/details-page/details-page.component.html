@@ -2,9 +2,17 @@
 
 <div class="container">
 
-    <app-flight-details-summary ></app-flight-details-summary>
-    <app-contact-details></app-contact-details>
-    <app-billingcard></app-billingcard>
+
+    <div class="d-flex flex-column justify-content-between" style="height: 100vh;">
+        <div>
+            <app-flight-details-summary></app-flight-details-summary>
+            <app-contact-details></app-contact-details>
+            <app-billingcard></app-billingcard>
+        </div>
+        <div class="text-end">
+            <button class="btn btn-primary btn-lg" (click)="onClick()">Continue</button>
+        </div>
+    </div>
 </div>
 
 <footer></footer>

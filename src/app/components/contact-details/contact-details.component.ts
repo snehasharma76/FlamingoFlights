@@ -13,16 +13,15 @@ import { Router } from '@angular/router';
 })
 export class ContactDetailsComponent {
   numberOfPassengers: number = 1;
-  dataFilled: number = 1;
-
-  passengerDetails: Passenger[] = []
-    ;
+  dataFilled: number = 0;
+  // isFilled: boolean = false;
+  passengerDetails: Passenger[] = [];
   passengerForm!: FormGroup;
 
   submitted: boolean = false;
 
   showForm: boolean = true;
-  constructor(private fb: FormBuilder, private detailsService: DataService, private router: Router) {
+  constructor(private fb: FormBuilder, private detailsService: DataService) {
     this.passengerForm = this.fb.group({
       firstName: [null, [Validators.required, Validators.minLength(3)]],
       lastName: [null, [Validators.required, Validators.minLength(3)]],
@@ -36,25 +35,28 @@ export class ContactDetailsComponent {
   }
 
   onSubmit() {
-    console.log(this.passengerForm)
-    if (this.passengerForm.valid) {
-      this.submitted = true;
-      this.showForm = false;
-      this.passengerDetails.push(this.passengerForm.value);
-      this.passengerForm.reset();
+    // console.log(this.passengerForm)
+    if (this.passengerForm.invalid) {
+      return;
     }
-
+    this.dataFilled++;
+    this.submitted = true;
+    this.showForm = false;
+    this.passengerDetails.push(this.passengerForm.value);
+    this.passengerForm.reset();
+    console.log(this.passengerDetails)
+    if (this.dataFilled == this.numberOfPassengers) {
+      this.detailsService.setSharedData(this.passengerDetails);
+      this.detailsService.setInfo(true);
+    }
   }
   OnAddNewPassenger() {
-    this.dataFilled++;
-    if (this.dataFilled <= this.numberOfPassengers) {
+    if (this.dataFilled < this.numberOfPassengers) {
       this.submitted = false;
       this.showForm = true;
+
     }
-    else {
-      this.detailsService.setSharedData(this.passengerDetails);
-      console.log(this.passengerDetails)
-      this.router.navigate(["/payment"]);
+    else if (this.dataFilled >= this.numberOfPassengers) {
       alert("Data Filled For all Passengers")
     }
   }

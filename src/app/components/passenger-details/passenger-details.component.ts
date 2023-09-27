@@ -13,9 +13,14 @@ export class PassengerDetailsComponent {
 
   constructor(private detailsService: DataService) {
   }
+
   ngOnInit() {
-    this.passengerDetails = this.detailsService.getSharedData();
+    this.detailsService.getSharedData().subscribe((data) => {
+      console.log(data);
+      this.passengerDetails = data;
+    });
     console.log(this.passengerDetails);
 
   }
+
 }

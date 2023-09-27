@@ -1,63 +1,69 @@
-<div class="container-fluid px-0 my-3" > <!-- update made by anurag : added px-0 and changed to container fluid-->
+<div class="container-fluid px-0 my-3"> <!-- update made by anurag : added px-0 and changed to container fluid-->
     <div class="card">
         <div class="card-header">
             Billing Address
             <i class="bi bi-exclamation-circle"></i>
         </div>
-        <form [formGroup]=" registerForm"> 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card-body">
-                    <div class="form-group"> 
-                    <label for="floatingInput">Pincode*</label>
-                    <input type="text" class="form-control" id="validationDefault01"
-                    placeholder="Enter Pincode" required formControlName="pincode">
-                <div *ngIf="(submitted || f['pincode'].touched) && f['pincode'].errors"
-                    class="text-danger small">
-                    <span *ngIf="f['pincode'].errors?.['required']">Pincode is required</span>
-                    <span *ngIf="f['pincode'].errors?.['minlength']">Pincode can't be less than 6</span>
-                </div>
-                </div>
-                <div class="form-group"> 
-                    <label for="validationDefault01">City</label>
-                    <input type="text" class="form-control" id="validationDefault01"
-                    placeholder="Enter City" required formControlName="city">
-                <div *ngIf="(submitted || f['city'].touched) && f['city'].errors"
-                    class="text-danger small">
-                    <span *ngIf="f['city'].errors?.['required']">City is required</span>
-                    <span *ngIf="f['city'].errors?.['minlength']">City can't be less than 3</span>
-                </div>
-                </div>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <div class="card-body">
-                    <div class="form-group"> 
-                    <label for="validationDefault01">Address</label>
-                    <input type="text" class="form-control" id="validationDefault01"
-                                    placeholder="Enter Billing Address" required formControlName="billingaddress">
-                                <div *ngIf="(submitted || f['billingaddress'].touched) && f['billingaddress'].errors"
-                                    class="text-danger small">
-                                    <span *ngIf="f['billingaddress'].errors?.['required']">Billing Address is required</span>
-                                    <span *ngIf="f['billingaddress'].errors?.['minlength']">Billing Address can't be less than 15</span>
-
-                                </div>
+        <form [formGroup]="billingForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="floatingInput">Pincode</label>
+                            <input type="text" class="form-control" id="validationDefault01" placeholder="Enter Pincode"
+                                required formControlName="pincode">
+                            <div *ngIf="(submitted || f['pincode'].touched) && f['pincode'].errors"
+                                class="text-danger small">
+                                <span *ngIf="f['pincode'].errors?.['required']">Pincode is required</span>
+                                <span *ngIf="f['pincode'].errors?.['minlength']">Pincode can't be less than 6
+                                    digits</span>
+                                <span *ngIf="f['pincode'].errors?.['maxlength']">Pincode can't be more than 6
+                                    digits</span>
                             </div>
-                            <div class="form-group"> 
-                            <label for="validationDefault01">State</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault01">City</label>
+                            <input type="text" class="form-control" id="validationDefault01" placeholder="Enter City"
+                                required formControlName="city">
+                            <div *ngIf="(submitted || f['city'].touched) && f['city'].errors" class="text-danger small">
+                                <span *ngIf="f['city'].errors?.['required']">City is required</span>
+                                <span *ngIf="f['city'].errors?.['minlength']">City can't be less than 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="validationDefault01">Address</label>
                             <input type="text" class="form-control" id="validationDefault01"
-                                    placeholder="Enter State" required formControlName="state">
-                                <div *ngIf="(submitted || f['state'].touched) && f['state'].errors"
-                                    class="text-danger small">
-                                    <span *ngIf="f['state'].errors?.['required']">State is required</span>
-                                    <span *ngIf="f['state'].errors?.['minlength']">State can't be less than 3</span>
-                                </div>
-                                </div>
+                                placeholder="Enter Billing Address" required formControlName="billingaddress">
+                            <div *ngIf="(submitted || f['billingaddress'].touched) && f['billingaddress'].errors"
+                                class="text-danger small">
+                                <span *ngIf="f['billingaddress'].errors?.['required']">Billing Address is
+                                    required</span>
+                                <span *ngIf="f['billingaddress'].errors?.['minlength']">Billing Address can't be less
+                                    than 15</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault01">State</label>
+                            <input type="text" class="form-control" id="validationDefault01" placeholder="Enter State"
+                                required formControlName="state">
+                            <div *ngIf="(submitted || f['state'].touched) && f['state'].errors"
+                                class="text-danger small">
+                                <span *ngIf="f['state'].errors?.['required']">State is required</span>
+                                <span *ngIf="f['state'].errors?.['minlength']">State can't be less than 3</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="text-end">
+                <button class="btn btn-outline-info">Save</button>
+            </div>
         </form>
-        <button style="border-color: rgb(175, 206, 233);" class="btn btn-primary" type="submit" >Save</button>
-  
+
     </div>
 </div>
