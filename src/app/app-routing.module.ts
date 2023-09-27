@@ -8,15 +8,18 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { authguardGuard } from './services/authguard.guard';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
   {path:'search', component: SearchPageComponent},
-  {path:'details',component:DetailsPageComponent},
+  {path:'details',component:DetailsPageComponent,canActivate:[authguardGuard]},
   {path:'payment', component:PaymentPageComponent},
   {path:'admin', component:AdminPageComponent},
   {path:'login',component:LoginPageComponent},
   {path:'registration', component:RegistrationPageComponent},
+  {path:'bookings', component:BookingsComponent},
   {path:'**',redirectTo:''}
 ];
 

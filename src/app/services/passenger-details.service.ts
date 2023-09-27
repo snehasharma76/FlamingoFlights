@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Passenger } from '../models/passenger.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Booking } from '../models/booking.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class PassengerDetailsService {
 
     return this.http.delete<number>(this.baseUrl + '/remove/' + passengerId);
   }
-
+  
+  //api call for inserting cancelled record
+  InsertCancelledFlight(details:Booking):Observable<boolean>{
+        return this.http.post<boolean>(this.baseUrl + '/cancellation/addentry', details);
+  }
 
 }

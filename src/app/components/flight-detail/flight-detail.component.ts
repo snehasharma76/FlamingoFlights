@@ -1,6 +1,9 @@
 import { Component, DoCheck, Input, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Airline } from 'src/app/models/airline.model';
 import { AirlineService } from 'src/app/services/airline.services';
+import { BookFlightService } from 'src/app/services/book-flight.service';
+import { FlightDataValuesService } from 'src/app/services/flight-data-values.service';
 
 
 
@@ -11,10 +14,10 @@ import { AirlineService } from 'src/app/services/airline.services';
 })
 export class FlightDetailComponent implements OnInit {
 
-  @Input() searchedFlights: Airline[] = [];
+ searchedFlights: Airline[] = [];
+ //flighBooked :Airline;
 
-
-  constructor(private airlineService: AirlineService) { }
+  constructor(private airlineService: AirlineService, private bookThisFlight:BookFlightService, private router:Router) { }
 
   ngOnInit(): void {
     this.airlineService.getSharedData().subscribe((result) => {
@@ -55,12 +58,17 @@ export class FlightDetailComponent implements OnInit {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
       ];
       const month = monthNames[dateObj.getMonth()];
-      // day = day.splice(0,3)
       return `${weekday}, ${day} ${month}`
     } catch (error) {
       // Handle invalid date format
       return "";
     }
+  }
+
+  bookFlightById(flightToBook:Airline){
+      console.log(flightToBook);
+      this.bookThisFlight.setFlightData(flightToBook);
+      this.router.navigate(["/details"])
   }
 
 }

@@ -1,26 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Airline } from 'src/app/models/airline.model';
-import { BookFlightService } from 'src/app/services/book-flight.service';
-import { FlightDetailComponent } from '../flight-detail/flight-detail.component';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-flight-details-summary',
-  templateUrl: './flight-details-summary.component.html',
-  styleUrls: ['./flight-details-summary.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class FlightDetailsSummaryComponent implements OnInit{
+export class FlightDataValuesService {
 
-  
-  flight:Airline = new Airline();
-  constructor(private getThisFlight:BookFlightService) { }
-  ngOnInit(): void {
-    this.flight = this.getThisFlight.getFlightData();
-    // console.log(this.flight);
-  }
+  constructor() { }
 
-
-
-  calculateTimeDifference(startTime: any, endTime: any) {
+    calculateTimeDifference(startTime: any, endTime: any) {
     startTime = startTime.replace('T', ' ');
     endTime = endTime.replace('T', ' ');
 
@@ -58,6 +45,4 @@ export class FlightDetailsSummaryComponent implements OnInit{
       return "";
     }
   }
-
-  
 }

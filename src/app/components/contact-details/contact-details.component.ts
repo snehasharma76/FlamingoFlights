@@ -6,6 +6,9 @@ import { DateValidatorContactDetails } from '../../shared/contact-details-date-v
 import { Passenger } from '../../models/passenger.model';
 import { DataService } from "../../services/data.service"
 import { Router } from '@angular/router';
+import { BookFlightService } from 'src/app/services/book-flight.service';
+import { SetFlightSearchDataService } from 'src/app/services/set-flight-search-data.service';
+import { FlightSearch } from 'src/app/models/flightserach.model';
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
@@ -17,11 +20,11 @@ export class ContactDetailsComponent {
 
   passengerDetails: Passenger[] = [];
   passengerForm!: FormGroup;
-
+  flightSearched!:FlightSearch;
   submitted: boolean = false;
 
   showForm: boolean = true;
-  constructor(private fb: FormBuilder, private detailsService: DataService, private router: Router) {
+  constructor(private fb: FormBuilder, private detailsService: DataService, private router: Router, private flightBookServices:BookFlightService, private getSearchedFligthDetails:SetFlightSearchDataService) {
     this.passengerForm = this.fb.group({
       firstName: [null, [Validators.required, Validators.minLength(3)]],
       lastName: [null, [Validators.required, Validators.minLength(3)]],
@@ -32,6 +35,10 @@ export class ContactDetailsComponent {
   }
 
   ngOnInit() {
+      // console
+      // this.flightSearched = this.getSearchedFligthDetails.getFlightSearchData();
+      // console.log(this.getSearchedFligthDetails.getFlightSearchData);
+      this.numberOfPassengers =  Number(this.getSearchedFligthDetails.getFlightSearchData());
   }
 
   onSubmit() {
@@ -53,7 +60,7 @@ export class ContactDetailsComponent {
     else {
       this.detailsService.setSharedData(this.passengerDetails);
       console.log(this.passengerDetails)
-      this.router.navigate(["/payment"]);
+      // this.router.navigate(["/payment"]);
       alert("Data Filled For all Passengers")
     }
   }

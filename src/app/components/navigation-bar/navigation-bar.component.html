@@ -1,40 +1,40 @@
- <nav class="navbar navbar-expand-lg navbar-light bg-primary ">
-   <div class="container-fluid">
-  <a class="navbar-brand" href="#">
-    <img src = "../../assets/aviation_logo-19.png" alt="Flamingo Airlines" width="40" height="40" class="navbar-logo">
-    Flamingo Airlines</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" (click)="toggleCollapsed()" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/Flamingo-logos_white.png" alt="Flamingo Airlines" width="60" height="60" class="navbar-logo">
+      &nbsp; &nbsp;Flamingo Airlines</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      (click)="toggleCollapsed()" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <button style="border-color: aliceblue;" class="btn btn-primary  my-2 my-sm-0 " type="submit" >Login</button>
-    </form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"
+      [ngClass]="{'collapse': collapsed, 'navbar-collapse': true}">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="contact">Contact Us</a>
+        </li>
+      </ul>
+
+      <div *ngIf = "!checkIfLoggedIn()" >
+        <button style="border-color: aliceblue;" class="btn my-2 my-sm-0 px-4" routerLink="login"> Login</button>
+      </div>
+      <div class="dropdown dropdown-image" *ngIf = "checkIfLoggedIn()">
+        <img src="../../../assets/user.png" alt="Image" width="50" height="50" class="dropdown-toggle"
+          data-toggle="dropdown">
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Option 1</a>
+          <a class="dropdown-item" href="#">Option 2</a>
+          <a class="dropdown-item" href="#">Option 3</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
- <!-- <nav class="navbar">
-  <div class="logo">
-      <img src= "../../assets/aviation_logo-19.png" alt="Flamingo Airlines ">
-      <span class="brand-name">Flamingo Airlines</span>
-  </div>
-  <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Contact Us</a></li>
-      <li><a href="#">About</a></li>
-  </ul>
-  <button class="login-btn" type = "submit">Login</button>
-</nav> -->  
-

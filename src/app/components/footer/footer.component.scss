@@ -1,2 +1,12 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
+@import '../../shared/colors.scss' ;
 
+.footer-2{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+}
+
+.footer-1{
+background-color  : $blue_secondary ;
+color : $blue_tertiary;
+}

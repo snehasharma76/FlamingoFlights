@@ -1,83 +1,54 @@
-<!-- flight-details.component.html -->
-
-<div *ngFor = "let flight of searchedFlights">
-<div class="c-flight-listing-row-v2">
-  <div class="summary-section">
-    <div class="row">
-      <div class="md-3 d-flex">
-        <!-- For logo -->
-        <div class="flight-info p-2">
-          <div class="airline-info">
-            <div class="logo">
-              <img title="Flamingo76" src="https://images.ixigo.com/img/common-resources/airline-new/6E.png"
-                width="50px;">
-            </div>
-            <div class="text">
-              <div class="u-text-ellipsis">
-                <div title="Flamingo" class="u-uppercase u-text-ellipsis">{{flight.flightId}}</div>
-                <div class="F12345" class="u-text-ellipsis">{{flight.flightName}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="md-6">
-          <!-- for flight info -->
-          <div class="flight-summary">
-            <div class="left-wing p-2">
-              <div class="airport-code">{{flight.origin | uppercase | slice:0:3}}</div>
-              <div class="time">{{flight.timeOfDeparture | selectTime}}</div>
-              <div class="date">{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
-              <div class="text">{{flight.origin}}</div>
-            </div>
-            <div class="timeline-widget u-lfloat">
-              <div class="c-timeline-wrapper horizontal">
-                <div class="label tl first" style="font-size: 12px;"></div>
-                <div class="label tl" style="font-size: 12px;">{{calculateTimeDifference(flight.timeOfDeparture, flight.timeOfArrival)}}</div>
-                <div class="label t1 last" style="font-size: 12px;"></div>
-                <div class="c-timeline" style="height: 2px;background-color: rgb(187,187,187);"></div>
-                <div class="label br first" style="font-size: 12px"></div>
-                <div class="label br" style="font-size: 12px;">non-stop</div>
-                <div class="label br last" style="font-size: 12px;"></div>
-              </div>
-            </div>
-            <div class="right-wing p-2">
-              <div class="airport-code">{{flight.destination | truncateLocation}}</div>
-              <div class="time">{{flight.timeOfArrival | selectTime}}</div>
-              <div class="date">{{extractDayAndMonth(flight.timeOfArrival)}}</div>
-              <div class="text">{{flight.destination}}</div>
-
-            </div>
-          </div>
-
-        </div>
-        <div class="md-3">
-          <!-- for price and button -->
-          <div class="provider-list">
-            <div class="fare-provider-list u-fb single-item">
-              <div class="list-item selected-fare">
-
-                <div class="col-md-3">
-                  <div class="price-section">
-                    <div class="before-cashback-fare">
-                      <div class="fare-text">
-                        <div class="c-price-diplay u-text-ellipsis" title>
-                          <span>{{flight.startingFarePerSeat+999}}</span>
-                        </div>
-                        <div class="strike-through"></div>
-                      </div>
-                    </div>
-                    <div class="price" style="padding-right: 10px; padding-bottom:10px;">
-                      <div class="c-price-display u-text-ellipsis" title>
-                        <span>{{flight.startingFarePerSeat}}</span>
-                      </div>
-                    </div>
-                    <button type="button" class="btn btn-warning btn-lg">Book</button>
-                    <div class="features u-ib"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<div *ngFor="let flight of searchedFlights">
+  <div class="d-flex justify-content-between mt-2 bg-light px-2 cont">
+    <div class="col-md-2 mt-2 ms-1">
+      <div class="mb-2">
+        <img title="Flamingo76" src="../../../assets/Flamingo-logos_transparent.png" width="50px;">
+      </div>
+      <div>
+        <div>
+          <div title="Flamingo">{{flight.flightId}}</div>
+          <div class="F12345">{{flight.flightName}}</div>
         </div>
       </div>
     </div>
+    <div class="col-md-8 d-flex justify-content-between ">
+      <div class="mt-2 ">
+        <div>
+          <div><strong>{{flight.origin | uppercase | slice:0:3}}</strong></div>
+          <div>{{flight.timeOfDeparture | selectTime}}</div>
+          <div>{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
+          <div>{{flight.origin}}</div>
+        </div>
+      </div>
+      <div class="col-md-8  text-center p-4">
+        <div class="">
+          <i class="bi bi-clock me-1"></i>
+          <div style="font-size: 12px;">{{calculateTimeDifference(flight.timeOfDeparture,
+            flight.timeOfArrival)}}</div>
+          <div style="height: 2px;background-color: rgb(187,187,187);"></div>
+          <div *ngIf="flight.breakFlight == 'Y' ">
+            <div style="font-size: 12px;">non-stop</div>
+          </div>
+          <div *ngIf="flight.breakFlight == 'N' ">
+            <div style="font-size: 12px;">have Layover</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div><strong>{{flight.destination | uppercase | slice:0:3}}</strong></div>
+        <div>{{flight.timeOfDeparture | selectTime}}</div>
+        <div>{{extractDayAndMonth(flight.timeOfDeparture)}}</div>
+        <div>{{flight.destination}}</div>
+      </div>
+    </div>
+
+    <div class="col-md-2 d-flex justify-content-center align-items-center justify-content-evenly">
+      <div>
+        <span><strong>₹{{flight.startingFarePerSeat}}</strong></span>
+      </div>
+      <div>
+        <button type="button" class="btn ms-auto" (click) = "bookFlightById(flight)">Book</button>
+      </div>
+    </div>
+  </div>
+</div>

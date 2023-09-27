@@ -11,8 +11,9 @@ export class BookingService {
   baseUrl: string = "https://localhost:44356/api/booking"
   constructor(private http: HttpClient) { }
 
-  GetBookedFlights(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.baseUrl + '/bookedflights');
+  GetBookedFlights(email:string): Observable<Booking[]> {
+    console.log(email);
+    return this.http.get<Booking[]>(this.baseUrl + `/bookedflights`,{params:{"emailId":email}});
   }
   BookFlight1(details: Booking): Observable<number> {
     return this.http.post<number>(this.baseUrl + '/addbooking', details);

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Airline } from 'src/app/models/airline.model';
 import { FlightSearch } from 'src/app/models/flightserach.model';
 import { AirlineService } from 'src/app/services/airline.services';
+import { SetFlightSearchDataService } from 'src/app/services/set-flight-search-data.service';
 import { CheckSeatLimit, dateValidatorDepart, dateValidatorReturn, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
 
 @Component({
@@ -28,7 +29,7 @@ export class DetailsComponentComponent implements OnInit {
   searchFlights:FlightSearch = new FlightSearch();
 
  
-  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService, private router:Router) { }
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private airlineService: AirlineService, private router:Router, private setSearchedFligthData:SetFlightSearchDataService ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -53,6 +54,10 @@ export class DetailsComponentComponent implements OnInit {
       console.log(value);
 
       this.airlineService.setSharedData(this.flights);
+      // console.log(this.registerForm.value);
+      this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
+      this.setSearchedFligthData.setFlightSearchData(this.searchFlights);
+
       this.router.navigate(["/search"])
     },
       error => {
@@ -79,12 +84,12 @@ export class DetailsComponentComponent implements OnInit {
     let Chh = new Date().getHours();
     let Css:string = ":00";
 
-    // console.log(this.registerForm.value);
     this.searchFlights.Origin = this.registerForm.controls["origin"].value;
     this.searchFlights.Destination = this.registerForm.controls["destination"].value;
-    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value+'T'+Chh+":"+Cmm+Css;;
+    this.searchFlights.TimeOfDeparture = this.registerForm.controls["departureDate"].value;
     this.searchFlights.NumberOfPassengers = this.registerForm.controls["passenger"].value;
     console.log(this.searchFlights.TimeOfDeparture);
+    // console.log(this.registerForm.value);
     this.searchFlightsByDataProvided(this.searchFlights);
 
   }

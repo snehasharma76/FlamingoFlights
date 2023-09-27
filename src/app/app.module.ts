@@ -31,7 +31,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { TestComponent } from './components/test/test.component';
 import { DataService } from './services/data.service';
 import { SelectTimePipe } from './pipes/select-time.pipe';
-
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 
 @NgModule({
@@ -61,8 +61,8 @@ import { SelectTimePipe } from './pipes/select-time.pipe';
     LoginPageComponent,
     RegistrationPageComponent,
     TestComponent,
-    SelectTimePipe
-
+    SelectTimePipe,
+    BookingsComponent
   ],
   imports: [
     BrowserModule,

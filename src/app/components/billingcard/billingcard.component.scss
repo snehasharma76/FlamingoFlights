@@ -1,3 +1,5 @@
+@import '../../shared/colors.scss' ;
+
 .form-control{
     border-top: 0px;
     border-left: 0px;
@@ -20,3 +22,17 @@
 //     color: green;
 //     border: 1px solid green;
 // }
+
+.card-header{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+}
+
+button{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+    border: 0px;
+    border-end-start-radius: 5px;
+    border-end-end-radius: 5px;
+}
+
