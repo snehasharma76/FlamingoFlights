@@ -1,3 +1,5 @@
+@import'../../shared/colors.scss';
+
 .passenger-list {
     list-style-type: none;
     padding: 0;
@@ -19,4 +21,16 @@
 .field {
     flex: 1;
     margin-right: 10px;
+}
+
+
+.card-header, .card-footer{
+    background-color: $blue_primary;
+    color: $blue_tertiary;
+
+    p{
+        font-size: 1.3rem;
+        margin: 0;
+        padding: 0;
+    }
 }

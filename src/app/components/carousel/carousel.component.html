@@ -1,18 +1,22 @@
-<div *ngIf="images && images.length>0" class="carousel-container">
-    <img *ngFor="let image of images;let i=index" [src]="image.imageSrc" alt="" class="w-100"
-        [ngClass]="{'image-active':selectedIndex === i}">
+<div style="padding-left: 0.8rem; padding-right: 0.8rem;">
+  
+    <div *ngIf="images && images.length>0" class="carousel-container my-0 ">
+        <img *ngFor="let image of images;let i=index" [src]="image.imageSrc" alt="" class="w-100"
+            [ngClass]="{'image-active':selectedIndex === i}">
 
 
-    <div *ngIf="indicators" class="carousel-dot-container">
-        <span *ngFor="let dot of images;let i=index" class="dot" [ngClass]="{'active':selectedIndex===i}"
-            (click)="selectImage(i)"></span>
+        <div *ngIf="indicators" class="carousel-dot-container">
+            <span *ngFor="let dot of images;let i=index" class="dot" [ngClass]="{'active':selectedIndex===i}"
+                (click)="selectImage(i)"></span>
+        </div>
+        <div *ngIf="controls" class="btn-carousel btn-prev">
+
+            <i class="bi bi-arrow-left-circle icon-carousel icon-prev" (click)="onPrevClick()"></i>
+        </div>
+        <div *ngIf="controls" class="btn-carousel btn-next">
+
+            <i class="bi bi-arrow-right-circle icon-carousel icon-next" (click)="onNextClick()"></i>
+        </div>
     </div>
-    <div *ngIf="controls" class="btn-carousel btn-prev">
 
-        <i class="bi bi-arrow-left-circle icon-carousel icon-prev" (click)="onPrevClick()"></i>
     </div>
-    <div *ngIf="controls" class="btn-carousel btn-next">
-
-        <i class="bi bi-arrow-right-circle icon-carousel icon-next" (click)="onNextClick()"></i>
-    </div>
-</div>
