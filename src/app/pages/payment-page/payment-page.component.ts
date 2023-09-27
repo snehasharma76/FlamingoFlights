@@ -12,7 +12,7 @@ export class PaymentPageComponent implements OnInit {
   
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
-    this.user.logout() ;
+    // this.user.logout() ;
   }
 
 }
