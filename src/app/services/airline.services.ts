@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, of, BehaviorSubject, throwError } from 'rxjs';
 import { Airline } from '../models/airline.model';
 import { Flights } from '../models/flights.model';
 import { FlightSearch } from '../models/flightserach.model';
@@ -12,7 +12,7 @@ export class AirlineService {
 
     baseUrl: string = 'https://localhost:44356/flights'
 
-     private searchedFlights = new BehaviorSubject<Airline[]>([]);
+    private searchedFlights = new BehaviorSubject<Airline[]>([]);
 
     constructor(private http: HttpClient) { }
 
@@ -36,14 +36,21 @@ export class AirlineService {
 
     //For user Search
     searchFlightsForUsers(searchedFlights: FlightSearch): Observable<Airline[]> {
-        return this.http.post<Airline[]>(this.baseUrl + `/user/searchflights`, searchedFlights);
+        try {
+            return this.http.post<Airline[]>(this.baseUrl + `/user/searchflights`, searchedFlights);
+        }
+        catch (error) {
+            console.error(error);
+            return throwError('Error occurred while fetching flight details'); // thorwing error
+
+        }
     }
 
     setSharedData(data: Airline[]) {
         console.log(data);
         this.searchedFlights.next(data);
     }
-    getSharedData():Observable<Airline[]> {
+    getSharedData(): Observable<Airline[]> {
         // console.log(this.searchedFlights);
         return this.searchedFlights.asObservable();;
     }

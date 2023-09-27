@@ -1,11 +1,8 @@
-import { Component, DoCheck, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Airline } from 'src/app/models/airline.model';
 import { AirlineService } from 'src/app/services/airline.services';
 import { BookFlightService } from 'src/app/services/book-flight.service';
-import { FlightDataValuesService } from 'src/app/services/flight-data-values.service';
-
-
 
 @Component({
   selector: 'app-flight-detail',
@@ -14,32 +11,43 @@ import { FlightDataValuesService } from 'src/app/services/flight-data-values.ser
 })
 export class FlightDetailComponent implements OnInit {
 
- searchedFlights: Airline[] = [];
- //flighBooked :Airline;
+  searchedFlights: Airline[] = [];
 
-  constructor(private airlineService: AirlineService, private bookThisFlight:BookFlightService, private router:Router) { }
+  constructor(private airlineService: AirlineService, private bookThisFlight: BookFlightService, private router: Router) { }
 
   ngOnInit(): void {
-    this.airlineService.getSharedData().subscribe((result) => {
-      this.searchedFlights = result;
-    });
-    console.log(this.searchedFlights);
+    try {
+      this.airlineService.getSharedData().subscribe((result) => {
+        this.searchedFlights = result;
+      });
+    } catch (error) {
+      console.error('Error fetching searched flights:', error);
+    }
   }
 
   calculateTimeDifference(startTime: any, endTime: any) {
-    startTime = startTime.replace('T', ' ');
-    endTime = endTime.replace('T', ' ');
+    try {
+      startTime = startTime.replace('T', ' ');
+      endTime = endTime.replace('T', ' ');
 
-    const date1 = new Date(startTime);
-    const date2 = new Date(endTime);
-    // Calculate the time difference in milliseconds
-    const timeDifference = date2.getTime() - date1.getTime();
-    // Calculate hours and minutes
-    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}hr : ${minutes}min`;
+      const date1 = new Date(startTime);
+      const date2 = new Date(endTime);
+
+      if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+        throw new Error("Invalid date format");
+      }
+
+      // Calculate the time difference in milliseconds
+      const timeDifference = date2.getTime() - date1.getTime();
+      // Calculate hours and minutes
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      return `${hours}hr : ${minutes}min`;
+    } catch (error) {
+      console.error('Error calculating time difference:', error);
+      return "";
+    }
   }
-
 
   extractDayAndMonth(dateString: string): string {
     try {
@@ -58,19 +66,20 @@ export class FlightDetailComponent implements OnInit {
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
       ];
       const month = monthNames[dateObj.getMonth()];
-      return `${weekday}, ${day} ${month}`
+      return `${weekday}, ${day} ${month}`;
     } catch (error) {
-      // Handle invalid date format
+      console.error('Error extracting day and month:', error);
       return "";
     }
   }
 
-  bookFlightById(flightToBook:Airline){
+  bookFlightById(flightToBook: Airline) {
+    try {
       console.log(flightToBook);
       this.bookThisFlight.setFlightData(flightToBook);
-      this.router.navigate(["/details"])
+      this.router.navigate(["/details"]);
+    } catch (error) {
+      console.error('Error booking flight:', error);
+    }
   }
-
 }
-
-

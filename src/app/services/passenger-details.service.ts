@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Passenger } from '../models/passenger.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Booking } from '../models/booking.model';
 
 @Injectable({
@@ -14,30 +14,40 @@ export class PassengerDetailsService {
   constructor(private http: HttpClient) { }
 
   GetPassengerDetails(): Observable<Passenger[]> {
-    return this.http.get<Passenger[]>(this.baseUrl + '/all');
+    try {
+      return this.http.get<Passenger[]>(this.baseUrl + '/all');
+    } catch (error) {
+      console.error(error);
+      return throwError('Error occured while fetching passenger details')
+    }
   }
 
   AddPassengerDetails(details: Passenger): Observable<number> {
-    // const data = new Passenger();
-    // console.log(details);
-    // data.pnrNo = details.pnrNo;
-    // data.firstName = details.firstName;
-    // data.lastName = details.lastName;
-    // data.age = details.age;
-    // data.aadharNo = details.aadharNo;
-    // console.log(data);
+    try {
+      return this.http.post<number>(this.baseUrl + '/add-passenger', details);
+    } catch (error) {
+      return throwError('Error occured while adding passenger details')
+    }
 
-    return this.http.post<number>(this.baseUrl + '/add-passenger', details);
   }
 
   RemovePassenger(passengerId: number): Observable<number> {
+    try {
+      return this.http.delete<number>(this.baseUrl + '/remove/' + passengerId);
+    } catch (error) {
+      return throwError('Error occured while removing passenger details')
+    }
 
-    return this.http.delete<number>(this.baseUrl + '/remove/' + passengerId);
   }
-  
+
   //api call for inserting cancelled record
-  InsertCancelledFlight(details:Booking):Observable<boolean>{
-        return this.http.post<boolean>(this.baseUrl + '/cancellation/addentry', details);
+  InsertCancelledFlight(details: Booking): Observable<boolean> {
+    try {
+      return this.http.post<boolean>(this.baseUrl + '/cancellation/addentry', details);
+    } catch (error) {
+      return throwError('Error occured while inserting canceled flight data')
+    }
+
   }
 
 }

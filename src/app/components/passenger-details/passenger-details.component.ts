@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Passenger } from '../../models/passenger.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-passenger-details',
@@ -15,12 +16,22 @@ export class PassengerDetailsComponent {
   }
 
   ngOnInit() {
-    this.detailsService.getSharedData().subscribe((data) => {
-      console.log(data);
-      this.passengerDetails = data;
-    });
-    console.log(this.passengerDetails);
-
+    try {
+      this.detailsService.getSharedData().subscribe((data) => {
+        console.log(data);
+        this.passengerDetails = data;
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: 'Data Loaded Successfully',
+        //   text: 'Passenger details loaded successfully!',
+        // });
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occurred while loading data!',
+      });
+    }
   }
-
 }
