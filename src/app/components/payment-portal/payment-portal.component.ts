@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Card } from 'src/app/models/card';
 import { Register } from 'src/app/models/register.model';
+import { CardService } from 'src/app/services/card.service';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class PaymentPortalComponent implements OnInit {
   cardRegex: string = "^[0-9]{16}$";
   newUser:Register = {CustomerId: 1, FirstName: 'A', LastName: 'B', Email:'anurag@gmail.com', DateOfBirth: '01/2023', Password:'12222', AadharId:'1111'} ;
 
-  constructor(private fb: FormBuilder, private registerService: RegisterService){ }
+  constructor(private fb: FormBuilder, private cardService: CardService){ }
 
   ngOnInit(): void {
     this.cardDetailsForm = this.fb.group({
@@ -29,15 +31,30 @@ export class PaymentPortalComponent implements OnInit {
 
 
   onSubmit(){
-   
+    console.log(this.cardDetailsForm.value); 
+    let cardNumber = this.cardDetailsForm.value.cardNumber ;
+    let cardCvv = this.cardDetailsForm.value.cardCvv ;
+    let cardType = this.cardDetailsForm.value.creditDebit ;
+    let cardExpiry = this.cardDetailsForm.value.cardExpiryMonth + '/' + this.cardDetailsForm.value.cardExpiryYear ;
+
+    try {
+
+      this.cardService.ValidateCard(new Card(cardType, cardNumber, cardCvv, cardExpiry)).subscribe({
+        next:(res)=>{
+          console.log(res);
+          
+        },
+        error:(err) =>{
+
+        },
+        complete:() =>{}
+      });
+      
+    } catch (error) {
+      console.error(error) ;
+    }
     
   }
-
-
-
-
-
-
 
   get f():{[controlName: string]: AbstractControl} {
     return this.cardDetailsForm.controls ;

@@ -16,8 +16,8 @@ import { FlightSearch } from 'src/app/models/flightserach.model';
 })
 export class ContactDetailsComponent {
   numberOfPassengers: number = 1;
-  dataFilled: number = 1;
-
+  dataFilled: number = 0;
+  // isFilled: boolean = false;
   passengerDetails: Passenger[] = [];
   passengerForm!: FormGroup;
   flightSearched!:FlightSearch;
@@ -42,25 +42,28 @@ export class ContactDetailsComponent {
   }
 
   onSubmit() {
-    console.log(this.passengerForm)
-    if (this.passengerForm.valid) {
-      this.submitted = true;
-      this.showForm = false;
-      this.passengerDetails.push(this.passengerForm.value);
-      this.passengerForm.reset();
+    // console.log(this.passengerForm)
+    if (this.passengerForm.invalid) {
+      return;
     }
-
+    this.dataFilled++;
+    this.submitted = true;
+    this.showForm = false;
+    this.passengerDetails.push(this.passengerForm.value);
+    this.passengerForm.reset();
+    console.log(this.passengerDetails)
+    if (this.dataFilled == this.numberOfPassengers) {
+      this.detailsService.setSharedData(this.passengerDetails);
+      this.detailsService.setInfo(true);
+    }
   }
   OnAddNewPassenger() {
-    this.dataFilled++;
-    if (this.dataFilled <= this.numberOfPassengers) {
+    if (this.dataFilled < this.numberOfPassengers) {
       this.submitted = false;
       this.showForm = true;
+
     }
-    else {
-      this.detailsService.setSharedData(this.passengerDetails);
-      console.log(this.passengerDetails)
-      // this.router.navigate(["/payment"]);
+    else if (this.dataFilled >= this.numberOfPassengers) {
       alert("Data Filled For all Passengers")
     }
   }

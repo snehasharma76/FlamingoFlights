@@ -1,63 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-billingcard',
   templateUrl: './billingcard.component.html',
   styleUrls: ['./billingcard.component.scss']
 })
-export class BillingcardComponent  implements OnInit {
+export class BillingcardComponent implements OnInit {
 
- 
-
-  registerForm!: FormGroup;
-
+  billingForm!: FormGroup;
   submitted: boolean = false;
-
- 
-
- 
-
- constructor(private fb:FormBuilder){}
-
- 
+  isBillFilled: boolean = false;
+  constructor(private fb: FormBuilder, private detailsService: DataService) { }
 
   ngOnInit(): void {
-
-     this.registerForm = this.fb.group({
-
-      pincode:[null,[Validators.required, Validators.minLength(6)]],
-      billingaddress:[null,[Validators.required, Validators.minLength(15)]],
-      city:[null,[Validators.required, Validators.minLength(3)]],
-      state:[null,[Validators.required, Validators.minLength(3)]],
-     },
-
-     );
-
+    this.billingForm = this.fb.group({
+      pincode: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+      billingaddress: [null, [Validators.required, Validators.minLength(15)]],
+      city: [null, [Validators.required, Validators.minLength(3)]],
+      state: [null, [Validators.required, Validators.minLength(3)]],
+    },
+    );
   }
-
- 
-
   onSubmit() {
-
     this.submitted = true;
-
-    console.log(this.registerForm);
-
-    // console.log(this.getControl('firstName'));
-
-    console.log(this.f['firstName']);
-
+    console.log(this.billingForm.value);
+    this.detailsService.setBillAddInfo(true);
   }
-
- 
-
- 
-
   get f(): { [controlName: string]: AbstractControl } { //getter
-
-    return this.registerForm.controls;
-
+    return this.billingForm.controls;
   }
 }
- 
+
