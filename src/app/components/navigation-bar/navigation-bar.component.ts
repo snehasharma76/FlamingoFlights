@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserValidationService } from 'src/app/services/user-validation.service';
 import Swal from 'sweetalert2';
 
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class NavigationBarComponent {
 
-  constructor(private userValidation: UserValidationService) { }
+  constructor(private userValidation: UserValidationService, private router:Router) { }
 
   collapsed = true;
 
@@ -30,8 +31,29 @@ export class NavigationBarComponent {
     try {
       this.userValidation.logout();
       Swal.fire('Logged Out', 'You have been successfully logged out!', 'success');
+      sessionStorage.clear();
+      this.router.navigate(["/home"]);
     } catch (error) {
       console.error('An error occurred while logging out:', error);
     }
+  }
+
+  routeBooks(){
+    try{
+      if(sessionStorage.getItem("Role") == "Admin"){
+        this.router.navigate(["/admin"]);
+        return;
+      }
+      this.router.navigate(["/bookings"]);
+    }
+    catch(error){
+      console.error('An error occurred while logging out:', error);
+
+    }
+  }
+
+  taketoabout(){
+    this.router.navigate(["/about"]);
+
   }
 }

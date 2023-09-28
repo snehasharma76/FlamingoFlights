@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Airline } from 'src/app/models/airline.model';
 import { Flights } from 'src/app/models/flights.model';
 import { AirlineService } from 'src/app/services/airline.services';
 import { dateTimeValidatorArrival, dateTimeValidatorDepart, originDesinationNotSame } from 'src/app/shared/flightDetailValidator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-panel',
@@ -17,11 +19,15 @@ export class AdminPanelComponent implements OnInit {
 
   flightAddForm!: FormGroup;
   submitted: boolean = false;
-
-  constructor(private airlineService: AirlineService, private fb: FormBuilder) { }
+  role:string = "";
+  constructor(private airlineService: AirlineService, private fb: FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     try {
+      this.role != sessionStorage.getItem("Role");
+      if(this.role == "User"){
+      this.router.navigate(["/home"]);
+    }
       // Initialize the flightAddForm with validators
       this.flightAddForm = this.fb.group({
         origin: [null, [Validators.required, Validators.minLength(3)]],
@@ -71,8 +77,18 @@ export class AdminPanelComponent implements OnInit {
     try {
       this.airlineService.deleteFlight(id).subscribe(() => {
         console.log(`Flight With ${id} successfully deleted!!`);
+        Swal.fire({
+          icon: 'success',
+          title: 'Flight Deleted Successfully!!',
+          text: '',
+        });     
       },
         (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Can not delte this flight',
+            text: 'Passengers are onboarded in this flight ',
+          });          
           console.error(`Error deleting flight with ID ${id}:`, error);
         });
     } catch (error) {

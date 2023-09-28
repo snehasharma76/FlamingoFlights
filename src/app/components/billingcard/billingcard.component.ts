@@ -18,6 +18,7 @@ export class BillingcardComponent implements OnInit {
   ngOnInit(): void {
     try {
       // Initialize the billingForm with validators
+      
       this.billingForm = this.fb.group({
         pincode: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
         billingaddress: [null, [Validators.required, Validators.minLength(15)]],

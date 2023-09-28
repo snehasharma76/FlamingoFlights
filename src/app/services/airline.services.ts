@@ -10,7 +10,7 @@ import { FlightSearch } from '../models/flightserach.model';
 })
 export class AirlineService {
 
-    baseUrl: string = 'https://localhost:44356/flights'
+    baseUrl: string = 'https://localhost:44356/api/flights'
 
     private searchedFlights = new BehaviorSubject<Airline[]>([]);
 

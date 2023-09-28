@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class PassengerDetailsComponent {
   passengerDetails: Passenger[] = [];
-  emailId: string = "raukum74@gmail.com";
+  emailId: string = sessionStorage.getItem("Email") !== null ? sessionStorage.getItem("Email")! : "";
 
   constructor(private detailsService: DataService) {
   }

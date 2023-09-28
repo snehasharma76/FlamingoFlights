@@ -32,6 +32,8 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { DataService } from './services/data.service';
 import { SelectTimePipe } from './pipes/select-time.pipe';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     RegistrationPageComponent,
 
     SelectTimePipe,
-    BookingsComponent
+    BookingsComponent,
+    AboutusComponent,
+    AboutPageComponent
   ],
   imports: [
     BrowserModule,

@@ -16,23 +16,20 @@
           <a class="nav-link" routerLink="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="contact">Contact Us</a>
+          <a class="nav-link" routerLink="about" (click) = "taketoabout()">About</a>
         </li>
       </ul>
 
       <div *ngIf = "!checkIfLoggedIn()" >
         <button style="border-color: aliceblue;" class="btn my-2 my-sm-0 px-4" routerLink="login"> Login</button>
       </div>
-      <div class="dropdown dropdown-image" *ngIf = "checkIfLoggedIn()">
-        <img src="../../../assets/user.png" alt="Image" width="50" height="50" class="dropdown-toggle"
-          data-toggle="dropdown">
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Option 1</a>
-          <a class="dropdown-item" href="#">Option 2</a>
-          <a class="dropdown-item" href="#">Option 3</a>
+      <div class="dropdown dropdown-image d-none d-md-block" *ngIf="checkIfLoggedIn()">
+        <img src="../../../assets/user.png" alt="Image" width="50" height="50" class="dropdown-toggle" data-toggle="dropdown">
+      
+        <!-- Add the dropdown-menu-right and dropdown-menu-lg classes to adjust positioning -->
+        <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg">
+          <div class="dropdown-item"  style="cursor: pointer;" (click) = "routeBooks()">Bookings</div>
+          <div class="dropdown-item" (click) = "logout()"  style="cursor: pointer;">Logout</div>
         </div>
       </div>
     </div>

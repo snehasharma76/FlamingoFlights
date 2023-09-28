@@ -13,11 +13,10 @@ export class SearchPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("search loaded");
-    console.log(this.user.isUserActivated);
-    this.user.login() ;
-    console.log(this.user.isUserActivated);
-    
+    // console.log("search loaded");
+    // console.log(this.user.isUserActivated);
+    // this.user.login() ;
+    // console.log(this.user.isUserActivated);
   }
 
 }

@@ -10,6 +10,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { authguardGuard } from './services/authguard.guard';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'login',component:LoginPageComponent},
   {path:'registration', component:RegistrationPageComponent},
   {path:'bookings', component:BookingsComponent},
+  {path:'about',component:AboutPageComponent},
   {path:'**',redirectTo:''}
 ];
 
