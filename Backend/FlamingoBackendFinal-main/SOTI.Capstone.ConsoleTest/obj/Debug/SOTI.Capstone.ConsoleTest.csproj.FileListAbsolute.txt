@@ -1,0 +1,12 @@
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.ConsoleTest.exe.config
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.ConsoleTest.exe
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.ConsoleTest.pdb
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.FlamingoDAL.dll
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.FlamingoDAL.pdb
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\bin\Debug\SOTI.Capstone.FlamingoDAL.dll.config
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.csproj.AssemblyReference.cache
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.csproj.SuggestedBindingRedirects.cache
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.csproj.CoreCompileInputs.cache
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.csproj.CopyComplete
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.exe
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.ConsoleTest\obj\Debug\SOTI.Capstone.ConsoleTest.pdb

@@ -1,0 +1,14 @@
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.dll.config
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.dll
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.pdb
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.csproj.AssemblyReference.cache
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.csproj.CoreCompileInputs.cache
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.dll
+C:\Users\abhsharma\OneDrive - SOTI Inc\Desktop\Backend Capstone\SOTI.Capstone.Flamingo\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.pdb
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.dll.config
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.dll
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\bin\Debug\SOTI.Capstone.FlamingoDAL.pdb
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.csproj.AssemblyReference.cache
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.csproj.CoreCompileInputs.cache
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.dll
+C:\Users\ankrishna\OneDrive - SOTI Inc\Desktop\Capstone Project\FlamingoBackend\SOTI.Capstone.FlamingoDAL\obj\Debug\SOTI.Capstone.FlamingoDAL.pdb
